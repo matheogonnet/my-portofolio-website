@@ -1,7 +1,6 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import Image from 'next/image'
 import Navigation from '@/components/Navigation'
 
 const ConsoleText = ({ text, delay = 0 }: { text: string, delay?: number }) => (
@@ -38,19 +37,6 @@ export default function Home() {
           <h1 className="mb-8 bg-gradient-to-b from-cupertino-50 to-cupertino-200 bg-clip-text text-5xl font-bold tracking-tight text-transparent md:text-6xl">
             Hi! I'm Mathéo
           </h1>
-
-          {/* Profile Image with Blur Effect */}
-          <div className="relative mx-auto mb-12 h-64 w-64">
-            <div className="absolute bottom-0 left-0 right-0 h-1/5 bg-gradient-to-t from-cupertino-600 to-transparent" />
-            <Image
-              src="/images/profile_pict.png"
-              alt="Mathéo Gonnet"
-              width={256}
-              height={256}
-              className="rounded-full object-cover grayscale"
-              priority
-            />
-          </div>
 
           {/* Console Simulation */}
           <motion.div 
