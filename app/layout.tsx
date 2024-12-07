@@ -1,10 +1,9 @@
-import type { Metadata } from 'next'
 import './globals.css'
+import { metadata } from './metadata'
+import { Suspense } from 'react'
+import Loading from './loading'
 
-export const metadata: Metadata = {
-  title: 'Mathéo | Engineering Student',
-  description: 'Portfolio of Mathéo, an engineering student passionate about technology and innovation.',
-}
+export { metadata }
 
 export default function RootLayout({
   children,
@@ -14,7 +13,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="min-h-screen bg-cupertino-600 text-cupertino-50" suppressHydrationWarning>
-        {children}
+        <Suspense fallback={<Loading />}>
+          {children}
+        </Suspense>
       </body>
     </html>
   )

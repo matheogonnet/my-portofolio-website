@@ -97,7 +97,7 @@ export default function Contact() {
             transition={{ duration: 0.8 }}
           >
             <div className="glass-card p-8">
-              <h1 className="mb-6 bg-gradient-to-b from-cupertino-50 to-cupertino-200 bg-clip-text text-4xl font-bold tracking-tight text-transparent">
+              <h1 className="mb-6 font-['Manifesto'] text-4xl font-bold tracking-tight text-cupertino-50">
                 Get in Touch
               </h1>
               <p className="mb-8 text-lg text-cupertino-200">

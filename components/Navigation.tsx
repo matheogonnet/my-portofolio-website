@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image';
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion'
@@ -50,7 +51,7 @@ export default function Navigation() {
       <motion.nav 
         className="fixed top-0 z-50 w-full"
         animate={{
-          height: isScrolled ? "56px" : "64px",
+          height: isScrolled ? "70px" : "80px",
         }}
         transition={{ duration: 0.3 }}
       >
@@ -69,37 +70,17 @@ export default function Navigation() {
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="relative"
+                className="relative ml-[-100px]"
               >
-                <Link href="/" className="text-lg font-semibold text-cupertino-50">
-                  <motion.span
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
-                    className="relative"
-                  >
-                    Mathéo
-                    <motion.span 
-                      className="absolute -right-2 -top-1 text-xs text-accent-blue"
-                      animate={{ 
-                        opacity: [0, 1, 0],
-                        y: [0, -10, 0]
-                      }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        repeatDelay: 5
-                      }}
-                    >
-                      ✦
-                    </motion.span>
-                  </motion.span>
+                <Link href="/">
+                  <Image
+                    src="/images/matheo-gonnet-typo.png"
+                    alt="Mathéo Gonnet Logo"
+                    width={480}
+                    height={200}
+                    className="object-contain"
+                  />
                 </Link>
-                <motion.div
-                  className="absolute -bottom-1 left-0 h-0.5 w-0 bg-gradient-to-r from-accent-blue to-accent-purple"
-                  whileHover={{ width: "100%" }}
-                  transition={{ duration: 0.3 }}
-                />
               </motion.div>
               
               <div className="hidden md:block">
