@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 0%;
+    --foreground: 240 10% 97%;
+  }
+
+  body {
+    @apply antialiased bg-cupertino-600 text-cupertino-50;
+    font-feature-settings: "ss01" on, "ss02" on, "cv01" on, "cv02" on;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer components {
+  .glass-effect {
+    @apply bg-cupertino-500/80 backdrop-blur-lg;
+  }
+
+  .glass-card {
+    @apply rounded-2xl bg-cupertino-500/40 backdrop-blur-md transition-all hover:bg-cupertino-500/60;
+  }
+
+  .glass-button {
+    @apply rounded-full bg-cupertino-500/40 px-6 py-2 backdrop-blur-md transition-all hover:bg-cupertino-500/60;
+  }
+}
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: theme('colors.cupertino.500');
+}
+
+::-webkit-scrollbar-thumb {
+  background: theme('colors.cupertino.300');
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: theme('colors.cupertino.200');
+}
+
+/* Text selection */
+::selection {
+  background: theme('colors.accent.blue');
+  color: theme('colors.cupertino.50');
+} 
