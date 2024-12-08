@@ -97,8 +97,7 @@ export default function About() {
                     About Me
                   </h1>
                   <p className="text-lg text-cupertino-200">
-                    Hi! I'm Mathéo Gonnet, a 22-year-old student pursuing a Master's in Data & Artificial Intelligence at ECE Paris. Passionate about data science, web development, and AI, I'm constantly seeking to learn and take on new challenges.
-                  </p>
+                  Hi! 👋 I'm Mathéo Gonnet, a 22-year-old student pursuing a Master's in Data & Artificial Intelligence at ECE Paris. Passionate about data science, web development, and AI, I'm constantly seeking to learn and take on new challenges. 🚀                  </p>
                 </div>
               </div>
             </FloatingElement>
