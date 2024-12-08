@@ -4,17 +4,40 @@ import { motion } from 'framer-motion'
 import Navigation from '@/components/Navigation'
 import Chatbot from '@/components/Chatbot'
 
-const ConsoleText = ({ text, delay = 0 }: { text: string, delay?: number }) => (
-  <motion.div
-    initial={{ opacity: 0, x: -20 }}
-    animate={{ opacity: 1, x: 0 }}
-    transition={{ delay, duration: 0.5 }}
-    className="flex items-center space-x-2"
-  >
-    <span className="text-accent-purple">{'>'}</span>
-    <span className="text-cupertino-200">{text}</span>
-  </motion.div>
-)
+const ConsoleText = ({ text, lastWord = false }: { text: string, lastWord?: boolean }) => {
+  if (lastWord) {
+    const words = text.split(' ')
+    const lastWordText = words[words.length - 1]
+    const restOfText = words.slice(0, -1).join(' ') + ' '
+    
+    return (
+      <motion.div
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.5 }}
+        className="flex items-center space-x-2"
+      >
+        <span className="text-accent-purple">{'>'}</span>
+        <span className="text-cupertino-200">
+          {restOfText}
+          <span className="font-bold text-accent-blue">{lastWordText}</span>
+        </span>
+      </motion.div>
+    )
+  }
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: -20 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.5 }}
+      className="flex items-center space-x-2"
+    >
+      <span className="text-accent-purple">{'>'}</span>
+      <span className="text-cupertino-200">{text}</span>
+    </motion.div>
+  )
+}
 
 export default function Home() {
   return (
@@ -54,16 +77,18 @@ export default function Home() {
                 <span className="ml-2 text-sm text-cupertino-300">Terminal</span>
               </div>
               
-              <div className="mt-4 space-y-2 font-mono text-sm">
-                <ConsoleText text="C:\>" delay={0.8} />
-                <ConsoleText text="C:\> cd Engineering_Student" delay={1.2} />
-                <ConsoleText text="C:\Engineering_Student> cd 22yo" delay={1.6} />
-                <ConsoleText text="C:\Engineering_Student\22yo> Open_to_work" delay={2} />
-                <motion.div
-                  animate={{ opacity: [1, 0] }}
-                  transition={{ duration: 0.8, repeat: Infinity }}
-                  className="mt-1 h-4 w-2 bg-accent-purple"
-                />
+              <div className="mt-4 space-y-2 font-mono text-sm overflow-x-auto whitespace-nowrap scrollbar-thin scrollbar-track-cupertino-600 scrollbar-thumb-cupertino-400">
+                <div className="min-w-min">
+                  <ConsoleText text="C:\>" />
+                  <ConsoleText text="C:\> cd Data_AI" lastWord={true} />
+                  <ConsoleText text="C:\Data_AI> cd 22yo" lastWord={true} />
+                  <ConsoleText text="C:\Data_AI\22yo> Open_to_work" lastWord={true} />
+                  <motion.div
+                    animate={{ opacity: [1, 0] }}
+                    transition={{ duration: 0.8, repeat: Infinity }}
+                    className="mt-1 h-4 w-2 bg-accent-purple"
+                  />
+                </div>
               </div>
             </div>
           </motion.div>

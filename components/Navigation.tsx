@@ -16,15 +16,23 @@ const navItems = [
 
 const menuVariants = {
   closed: {
+    x: "100%",
     opacity: 0,
-    y: -20,
-    transition: { duration: 0.2 }
+    transition: { 
+      duration: 0.4,
+      type: "spring",
+      damping: 25,
+      stiffness: 200
+    }
   },
   open: {
+    x: 0,
     opacity: 1,
-    y: 0,
     transition: {
-      duration: 0.3,
+      duration: 0.4,
+      type: "spring",
+      damping: 25,
+      stiffness: 200,
       staggerChildren: 0.1,
       delayChildren: 0.2,
     }
@@ -32,19 +40,52 @@ const menuVariants = {
 }
 
 const itemVariants = {
-  closed: { opacity: 0, x: -10 },
-  open: { opacity: 1, x: 0 }
+  closed: { 
+    opacity: 0,
+    x: 20,
+    transition: { duration: 0.2 }
+  },
+  open: { 
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.4 }
+  }
+}
+
+const overlayVariants = {
+  closed: {
+    opacity: 0,
+    transition: { duration: 0.3 }
+  },
+  open: {
+    opacity: 1,
+    transition: { duration: 0.4 }
+  }
 }
 
 export default function Navigation() {
   const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const [hasInteracted, setHasInteracted] = useState(false)
   const { scrollY } = useScroll()
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     setIsScrolled(latest > 20)
   })
+
+  const pulseVariants = {
+    initial: { scale: 1, opacity: 0 },
+    animate: {
+      scale: [1, 1.2, 1],
+      opacity: [0, 0.3, 0],
+      transition: {
+        duration: 2,
+        repeat: Infinity,
+        repeatDelay: 3,
+      }
+    }
+  }
 
   return (
     <>
@@ -137,44 +178,58 @@ export default function Navigation() {
                 </motion.ul>
               </div>
 
-              <motion.button
-                className={`glass-button p-2 transition-all duration-300 md:hidden ${
-                  isOpen ? 'bg-accent-blue/20' : ''
-                }`}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => setIsOpen(!isOpen)}
-              >
-                <motion.div
-                  animate={isOpen ? "open" : "closed"}
-                  className="relative h-5 w-5"
+              <div className="relative md:hidden">
+                <motion.button
+                  className={`glass-button relative p-2 transition-all duration-300 ${
+                    isOpen ? 'bg-accent-blue/20' : ''
+                  }`}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => {
+                    setIsOpen(!isOpen)
+                    setHasInteracted(true)
+                  }}
+                  aria-label="Toggle navigation menu"
                 >
-                  <motion.span
-                    className="absolute left-0 top-0 h-0.5 w-5 bg-gradient-to-r from-cupertino-50 to-cupertino-200"
-                    variants={{
-                      closed: { rotate: 0, y: 0 },
-                      open: { rotate: 45, y: 2 }
-                    }}
-                    transition={{ duration: 0.3 }}
-                  />
-                  <motion.span
-                    className="absolute left-0 top-2 h-0.5 w-5 bg-gradient-to-r from-cupertino-50 to-cupertino-200"
-                    variants={{
-                      closed: { opacity: 1, x: 0 },
-                      open: { opacity: 0, x: 20 }
-                    }}
-                    transition={{ duration: 0.3 }}
-                  />
-                  <motion.span
-                    className="absolute left-0 top-4 h-0.5 w-5 bg-gradient-to-r from-cupertino-50 to-cupertino-200"
-                    variants={{
-                      closed: { rotate: 0, y: 0 },
-                      open: { rotate: -45, y: -2 }
-                    }}
-                    transition={{ duration: 0.3 }}
-                  />
-                </motion.div>
-              </motion.button>
+                  {!hasInteracted && !isOpen && (
+                    <motion.div
+                      className="absolute -inset-1 rounded-lg border-2 border-accent-blue"
+                      variants={pulseVariants}
+                      initial="initial"
+                      animate="animate"
+                    />
+                  )}
+                  <motion.div
+                    animate={isOpen ? "open" : "closed"}
+                    className="relative h-5 w-5"
+                  >
+                    <motion.span
+                      className="absolute left-0 top-0 h-0.5 w-5 bg-gradient-to-r from-cupertino-50 to-cupertino-200"
+                      variants={{
+                        closed: { rotate: 0, y: 0 },
+                        open: { rotate: 45, y: 2 }
+                      }}
+                      transition={{ duration: 0.3 }}
+                    />
+                    <motion.span
+                      className="absolute left-0 top-2 h-0.5 w-5 bg-gradient-to-r from-cupertino-50 to-cupertino-200"
+                      variants={{
+                        closed: { opacity: 1, x: 0 },
+                        open: { opacity: 0, x: 20 }
+                      }}
+                      transition={{ duration: 0.3 }}
+                    />
+                    <motion.span
+                      className="absolute left-0 top-4 h-0.5 w-5 bg-gradient-to-r from-cupertino-50 to-cupertino-200"
+                      variants={{
+                        closed: { rotate: 0, y: 0 },
+                        open: { rotate: -45, y: -2 }
+                      }}
+                      transition={{ duration: 0.3 }}
+                    />
+                  </motion.div>
+                </motion.button>
+              </div>
             </div>
           </div>
         </motion.div>
@@ -186,15 +241,18 @@ export default function Navigation() {
               animate="open"
               exit="closed"
               variants={menuVariants}
-              className="absolute left-0 right-0 top-[56px] glass-effect backdrop-blur-2xl md:hidden"
+              className="fixed right-4 top-[85px] h-auto max-h-[calc(90vh-85px)] w-[280px] overflow-hidden rounded-2xl bg-cupertino-600/70 shadow-lg backdrop-blur-xl md:hidden"
             >
+              <div className="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-cupertino-200/20 to-transparent" />
+              <div className="absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-transparent via-cupertino-200/20 to-transparent" />
+              
               <motion.div 
-                className="container mx-auto px-4 py-4"
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
+                className="flex h-full flex-col px-6 py-6"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
                 transition={{ duration: 0.3 }}
               >
-                <ul className="space-y-2">
+                <ul className="space-y-4">
                   {navItems.map((item, index) => {
                     const isActive = pathname === item.path
                     return (
@@ -202,24 +260,39 @@ export default function Navigation() {
                         key={item.path}
                         variants={itemVariants}
                         custom={index}
-                        whileHover={{ x: 10 }}
-                        className="transform transition-all duration-200"
+                        className="transform"
                       >
                         <Link
                           href={item.path}
                           onClick={() => setIsOpen(false)}
-                          className={`block rounded-lg px-4 py-2 text-sm transition-all duration-300 ${
+                          className={`group relative block rounded-xl px-4 py-3 text-base font-medium transition-all duration-300 ${
                             isActive
-                              ? 'bg-accent-blue/20 text-accent-blue'
-                              : 'text-cupertino-200 hover:bg-cupertino-500/40 hover:text-cupertino-50'
+                              ? 'text-accent-blue'
+                              : 'text-cupertino-200 hover:text-cupertino-50'
                           }`}
                         >
+                          <motion.div
+                            className="absolute inset-0 rounded-xl bg-gradient-to-r from-accent-blue/10 to-accent-purple/10"
+                            initial={false}
+                            animate={{
+                              opacity: isActive ? 1 : 0,
+                              scale: isActive ? 1 : 0.95
+                            }}
+                            transition={{ duration: 0.2 }}
+                          />
                           <motion.span
-                            initial={{ x: -20, opacity: 0 }}
+                            initial={{ x: -10, opacity: 0 }}
                             animate={{ x: 0, opacity: 1 }}
                             transition={{ delay: index * 0.1 }}
+                            className="relative z-10 flex items-center"
                           >
                             {item.name}
+                            <motion.div
+                              className="ml-2 h-1 w-1 rounded-full bg-accent-blue"
+                              initial={{ scale: 0 }}
+                              animate={{ scale: isActive ? 1 : 0 }}
+                              transition={{ duration: 0.2 }}
+                            />
                           </motion.span>
                         </Link>
                       </motion.li>
@@ -235,11 +308,11 @@ export default function Navigation() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-black/20 backdrop-blur-sm md:hidden"
+            initial="closed"
+            animate="open"
+            exit="closed"
+            variants={overlayVariants}
+            className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm md:hidden"
             onClick={() => setIsOpen(false)}
           />
         )}
