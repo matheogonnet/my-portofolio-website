@@ -10,6 +10,7 @@ interface Message {
   isBot: boolean
   timestamp: Date
   isError?: boolean
+  isHtml?: boolean
 }
 
 export default function Chatbot() {
@@ -64,11 +65,15 @@ export default function Chatbot() {
         throw new Error(data.error || 'Failed to get response')
       }
 
+      // Check if response contains HTML-like content
+      const hasHtml = data.reply.includes('<a href=') || data.reply.includes('<br>')
+
       const botMessage: Message = {
         id: messages.length + 2,
         text: data.reply,
         isBot: true,
-        timestamp: new Date()
+        timestamp: new Date(),
+        isHtml: hasHtml
       }
       setMessages(prev => [...prev, botMessage])
     } catch (error) {
@@ -130,7 +135,18 @@ export default function Chatbot() {
                           : 'bg-accent-purple text-cupertino-50'
                       }`}
                     >
-                      {message.text}
+                      {message.isHtml ? (
+                        <div 
+                          dangerouslySetInnerHTML={{ 
+                            __html: message.text.replace(
+                              /<a href=/g, 
+                              '<a class="text-accent-purple hover:underline" target="_blank" rel="noopener noreferrer" href='
+                            )
+                          }} 
+                        />
+                      ) : (
+                        message.text
+                      )}
                     </div>
                   </motion.div>
                 ))}
