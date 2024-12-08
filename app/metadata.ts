@@ -1,8 +1,8 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Mathéo | Engineering Student',
-  description: 'Portfolio of Mathéo, an engineering student passionate about technology and innovation.',
+  title: 'Mathéo Gonnet',
+  description: 'Welcome on my website! Here you can find more about me and my projects. \nMathéo Gonnet.',
   icons: {
     icon: [
       {
