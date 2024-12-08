@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import Navigation from '@/components/Navigation'
+import Chatbot from '@/components/Chatbot'
 
 const ConsoleText = ({ text, delay = 0 }: { text: string, delay?: number }) => (
   <motion.div
@@ -68,6 +69,8 @@ export default function Home() {
           </motion.div>
         </motion.div>
       </div>
+
+      <Chatbot />
     </main>
   )
 } 
