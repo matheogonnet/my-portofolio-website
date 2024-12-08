@@ -91,6 +91,33 @@ export default function Chatbot() {
     }
   }
 
+  // Animation variants for the chat bubble
+  const bubbleVariants = {
+    attention: {
+      scale: [1, 1.05, 1],
+      rotate: [0, -3, 3, -3, 0],
+      transition: {
+        scale: {
+          repeat: Infinity,
+          duration: 2,
+          ease: "easeInOut",
+          repeatDelay: 3
+        },
+        rotate: {
+          repeat: Infinity,
+          duration: 2,
+          ease: "easeInOut",
+          repeatDelay: 3,
+          times: [0, 0.2, 0.5, 0.8, 1]
+        }
+      }
+    },
+    idle: {
+      scale: 1,
+      rotate: 0
+    }
+  }
+
   return (
     <div className="fixed bottom-4 right-4 z-50">
       <AnimatePresence>
@@ -181,11 +208,27 @@ export default function Chatbot() {
       {/* Chat Bubble */}
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex h-14 w-14 items-center justify-center rounded-full bg-accent-purple text-cupertino-50 shadow-lg transition-transform hover:scale-105"
+        className="flex h-14 w-14 items-center justify-center rounded-full bg-accent-purple text-cupertino-50 shadow-lg transition-colors hover:bg-accent-purple/90"
+        variants={bubbleVariants}
+        animate={isOpen ? "idle" : "attention"}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
       >
         <BsRobot className="h-6 w-6" />
+        {!isOpen && (
+          <motion.div
+            className="absolute -right-1 -top-1 h-3 w-3 rounded-full bg-accent-blue"
+            animate={{
+              scale: [1, 1.2, 1],
+              opacity: [1, 0.5, 1]
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+        )}
       </motion.button>
     </div>
   )
