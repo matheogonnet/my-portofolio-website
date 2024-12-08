@@ -14,7 +14,7 @@ export default function Loading() {
           className="mb-8"
         >
           <h1 className="font-['Manifesto'] text-4xl text-cupertino-50">
-            Mathéo
+            Matheo
           </h1>
         </motion.div>
 
