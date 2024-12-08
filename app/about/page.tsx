@@ -93,8 +93,8 @@ export default function About() {
                   }}
                 />
                 <div className="glass-card relative p-8">
-                  <h1 className="mb-6 bg-gradient-to-b from-cupertino-50 to-cupertino-200 bg-clip-text text-4xl font-bold tracking-tight text-transparent">
-                    Mathéo Gonnet
+                  <h1 className="mb-6 font-['Manifesto'] text-4xl font-bold tracking-tight text-cupertino-50">
+                    About Me
                   </h1>
                   <p className="text-lg text-cupertino-200">
                     Hi! I'm Mathéo Gonnet, a 22-year-old student pursuing a Master's in Data & Artificial Intelligence at ECE Paris. Passionate about data science, web development, and AI, I'm constantly seeking to learn and take on new challenges.
