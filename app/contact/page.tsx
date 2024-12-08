@@ -3,7 +3,7 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
 import Navigation from '@/components/Navigation'
-import { BsEnvelope, BsLinkedin, BsGithub, BsCheckCircle, BsExclamationCircle } from 'react-icons/bs'
+import { BsEnvelope, BsLinkedin, BsGithub, BsCheckCircle, BsExclamationCircle, BsFileEarmarkPdf, BsGlobe } from 'react-icons/bs'
 
 interface FormData {
   name: string
@@ -150,6 +150,47 @@ export default function Contact() {
                     <p className="text-cupertino-50">linkedin.com/in/matheo-gonnet</p>
                   </div>
                 </motion.a>
+
+                <div className="rounded-lg bg-cupertino-500/40 p-4">
+                  <div className="mb-2 flex items-center space-x-2">
+                    <BsFileEarmarkPdf className="h-5 w-5 text-accent-indigo" />
+                    <h3 className="text-lg font-semibold text-cupertino-50">Resume</h3>
+                  </div>
+                  
+                  <div className="grid gap-2 sm:grid-cols-2">
+                    <motion.a
+                      href="/documents/gonnet_matheo_cv_fr.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center space-x-3 rounded-lg bg-cupertino-500/40 p-3 transition-all hover:bg-cupertino-500/60"
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-accent-blue/20">
+                        <span className="text-sm font-bold text-accent-blue">FR</span>
+                      </div>
+                      <div>
+                        <p className="text-sm text-cupertino-200">Version Française</p>
+                        <p className="text-xs text-cupertino-300">Voir le CV</p>
+                      </div>
+                    </motion.a>
+
+                    <motion.a
+                      href="/documents/gonnet_matheo_cv_en.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center space-x-3 rounded-lg bg-cupertino-500/40 p-3 transition-all hover:bg-cupertino-500/60"
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-accent-purple/20">
+                        <span className="text-sm font-bold text-accent-purple">EN</span>
+                      </div>
+                      <div>
+                        <p className="text-sm text-cupertino-200">English Version</p>
+                        <p className="text-xs text-cupertino-300">View Resume</p>
+                      </div>
+                    </motion.a>
+                  </div>
+                </div>
               </div>
             </div>
           </motion.div>
