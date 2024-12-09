@@ -4,6 +4,11 @@ import { motion } from 'framer-motion'
 import Navigation from '@/components/Navigation'
 import { BsCode, BsLightbulb, BsBook, BsController } from 'react-icons/bs'
 
+// Calculate age dynamically
+const birthDate = new Date('2002-04-11') // April 11, 2002
+const currentDate = new Date()
+const age = currentDate.getFullYear() - birthDate.getFullYear()
+
 const FloatingElement = ({ delay = 0, children }: { delay?: number, children: React.ReactNode }) => (
   <motion.div
     initial={{ y: 20, opacity: 0 }}
@@ -30,7 +35,12 @@ const skills = {
     "CI/CD", "GitHub", "Machine Learning", "Deep Learning"
   ],
   soft: [
-    "Curiosity", "Team Collaboration", "Project Management", "Autonomy"
+    "Strong Communication Skills", 
+    "Public Speaking",
+    "Team Collaboration", 
+    "Project Management", 
+    "Autonomy",
+    "Curiosity"
   ]
 }
 
@@ -97,7 +107,7 @@ export default function About() {
                     About Me
                   </h1>
                   <p className="text-lg text-cupertino-200">
-                    Hi! 👋 I'm Mathéo Gonnet, a 22-year-old student pursuing a Master's in Data & Artificial Intelligence at ECE Paris. Passionate about data science, web development, and AI, I'm constantly seeking to learn and take on new challenges. 🚀
+                    Hi! 👋 I'm Mathéo Gonnet, a {age}-year-old student pursuing a Master's in Data & Artificial Intelligence at ECE Paris. Passionate about data science, web development, and AI, I'm constantly seeking to learn and take on new challenges. 🚀
                   </p>
                 </div>
               </div>
@@ -114,9 +124,16 @@ export default function About() {
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
                       transition={{ delay: index * 0.1 }}
-                      className="flex items-center rounded-lg bg-cupertino-500/40 px-4 py-2"
+                      className="group flex items-center rounded-lg bg-cupertino-500/40 px-4 py-2"
+                      whileHover={{ scale: 1.05 }}
                     >
-                      <BsLightbulb className="mr-2 text-accent-blue" />
+                      <motion.div
+                        initial={{ rotate: 0 }}
+                        whileHover={{ rotate: [0, -10, 10, -10, 0] }}
+                        transition={{ duration: 0.5 }}
+                      >
+                        <BsLightbulb className="mr-2 text-accent-blue transition-all duration-300 group-hover:text-blue-400 group-hover:drop-shadow-[0_0_8px_rgba(96,165,250,0.5)]" />
+                      </motion.div>
                       <span className="text-cupertino-100">{skill}</span>
                     </motion.div>
                   ))}
