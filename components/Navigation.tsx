@@ -111,15 +111,15 @@ export default function Navigation() {
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="relative ml-[-100px]"
+                className="relative ml-0 md:ml-[-60px]"
               >
                 <Link href="/">
                   <Image
                     src="/images/matheo-gonnet-typo.png"
                     alt="Mathéo Gonnet Logo"
-                    width={480}
-                    height={200}
-                    className="object-contain"
+                    width={300}
+                    height={90}
+                    className="w-[200px] md:w-[300px] object-contain"
                   />
                 </Link>
               </motion.div>
