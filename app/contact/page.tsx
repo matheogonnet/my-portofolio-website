@@ -3,7 +3,7 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
 import Navigation from '@/components/Navigation'
-import { BsEnvelope, BsLinkedin, BsGithub, BsCheckCircle, BsExclamationCircle, BsFileEarmarkPdf, BsGlobe, BsArrowRightCircle } from 'react-icons/bs'
+import { BsEnvelope, BsLinkedin, BsGithub, BsCheckCircle, BsExclamationCircle, BsFileEarmarkPdf, BsGlobe, BsArrowRightCircle, BsStar, BsStarFill } from 'react-icons/bs'
 
 interface FormData {
   name: string
@@ -14,6 +14,33 @@ interface FormData {
 interface FormErrors {
   [key: string]: string
 }
+
+const contactMethods = [
+  {
+    id: 'email',
+    icon: <BsEnvelope className="h-6 w-6" />,
+    title: 'Email',
+    value: 'matheo.gonnet@yahoo.fr',
+    isPreferred: true,
+    link: 'mailto:matheo.gonnet@yahoo.fr'
+  },
+  {
+    id: 'github',
+    icon: <BsGithub className="h-6 w-6" />,
+    title: 'GitHub',
+    value: 'github.com/matheogonnet',
+    isPreferred: false,
+    link: 'https://github.com/matheogonnet'
+  },
+  {
+    id: 'linkedin',
+    icon: <BsLinkedin className="h-6 w-6" />,
+    title: 'LinkedIn',
+    value: 'linkedin.com/in/matheo-gonnet',
+    isPreferred: false,
+    link: 'https://linkedin.com/in/matheo-gonnet'
+  }
+]
 
 export default function Contact() {
   const [formData, setFormData] = useState<FormData>({
@@ -77,6 +104,63 @@ export default function Contact() {
     }
   }
 
+  const ContactMethodCard = ({ method }: { method: typeof contactMethods[0] }) => {
+    return (
+      <motion.a
+        href={method.link}
+        target={method.id !== 'email' ? '_blank' : undefined}
+        rel={method.id !== 'email' ? 'noopener noreferrer' : undefined}
+        className="group relative flex items-center space-x-4 rounded-lg bg-cupertino-500/40 p-4 pl-4 transition-all hover:bg-cupertino-500/60"
+        whileHover={{ x: 10, backgroundColor: "rgba(96, 165, 250, 0.2)" }}
+        style={{ width: '100%' }}
+      >
+        {method.isPreferred && (
+          <div className="absolute -right-2 -top-2 rounded-full bg-accent-blue/20 p-1.5">
+            <BsStarFill className="h-3 w-3 text-accent-blue" />
+          </div>
+        )}
+        <div 
+          className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-full ${
+            method.id === 'email' 
+              ? 'bg-accent-blue/20' 
+              : method.id === 'github'
+                ? 'bg-blue-500/20'
+                : 'bg-blue-400/20'
+          }`}
+          style={{ marginLeft: '0' }}
+        >
+          <motion.div
+            className={
+              method.id === 'email' 
+                ? 'text-accent-blue' 
+                : method.id === 'github'
+                  ? 'text-blue-500'
+                  : 'text-blue-400'
+            }
+            whileHover={{ 
+              rotate: method.isPreferred ? [0, -10, 10, -10, 0] : 0,
+              scale: 1.1
+            }}
+            transition={{ duration: 0.3 }}
+          >
+            {method.icon}
+          </motion.div>
+        </div>
+        <div className="flex-1 min-w-0" style={{ marginLeft: '1rem' }}>
+          <div className="flex items-center space-x-2">
+            <p className="text-sm text-cupertino-200">{method.title}</p>
+            {method.isPreferred && (
+              <p className="text-xs text-accent-blue">
+                Preferred
+              </p>
+            )}
+          </div>
+          <p className="text-cupertino-50 truncate">{method.value}</p>
+        </div>
+      </motion.a>
+    )
+  }
+
   return (
     <main className="relative min-h-screen overflow-hidden bg-cupertino-600">
       {/* Background gradient elements */}
@@ -88,17 +172,18 @@ export default function Contact() {
 
       <Navigation />
       
-      <div className="container relative z-10 mx-auto px-4 pt-32">
-        <div className="grid gap-8 md:grid-cols-2">
+      <div className="mx-auto max-w-6xl px-2 sm:px-6 lg:px-8 pt-32 pb-8">
+        <div className="grid gap-8 lg:grid-cols-2">
           {/* Contact Information */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
+            className="w-full max-w-xl mx-auto lg:max-w-none"
           >
-            <div className="glass-card p-8">
-              <div className="flex items-center space-x-3 mb-6">
-                <h1 className="text-4xl font-bold tracking-tight text-cupertino-50">
+            <div className="glass-card overflow-hidden p-3 sm:p-6 md:p-8">
+              <div className="flex items-center space-x-2 sm:space-x-3 mb-6">
+                <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-cupertino-50">
                   Get in Touch
                 </h1>
                 <motion.div
@@ -112,64 +197,22 @@ export default function Contact() {
                     ease: "easeInOut"
                   }}
                 >
-                  <BsArrowRightCircle className="h-8 w-8 text-accent-blue" />
+                  <BsArrowRightCircle className="h-5 w-5 sm:h-6 sm:w-6 md:h-8 md:w-8 text-accent-blue" />
                 </motion.div>
               </div>
-              <p className="mb-8 text-lg text-cupertino-200">
+              <p className="mb-6 sm:mb-8 text-sm sm:text-base md:text-lg text-cupertino-200">
                 Feel free to reach out! I'm always open to discussing new projects, opportunities, or just having a chat.
               </p>
 
-              <div className="space-y-4">
-                <motion.a
-                  href="mailto:matheo.gonnet@yahoo.fr"
-                  className="flex items-center space-x-4 rounded-lg bg-cupertino-500/40 p-4 transition-all hover:bg-cupertino-500/60"
-                  whileHover={{ x: 10, backgroundColor: "rgba(96, 165, 250, 0.2)" }}
-                >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-accent-blue/20">
-                    <BsEnvelope className="h-6 w-6 text-accent-blue" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-cupertino-200">Email</p>
-                    <p className="text-cupertino-50">matheo.gonnet@yahoo.fr</p>
-                  </div>
-                </motion.a>
+              <div className="space-y-3 sm:space-y-4">
+                {contactMethods.map((method) => (
+                  <ContactMethodCard key={method.id} method={method} />
+                ))}
 
-                <motion.a
-                  href="https://github.com/matheogonnet"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center space-x-4 rounded-lg bg-cupertino-500/40 p-4 transition-all hover:bg-cupertino-500/60"
-                  whileHover={{ x: 10, backgroundColor: "rgba(96, 165, 250, 0.2)" }}
-                >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-500/20">
-                    <BsGithub className="h-6 w-6 text-blue-500" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-cupertino-200">GitHub</p>
-                    <p className="text-cupertino-50">github.com/matheogonnet</p>
-                  </div>
-                </motion.a>
-
-                <motion.a
-                  href="https://linkedin.com/in/matheo-gonnet"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center space-x-4 rounded-lg bg-cupertino-500/40 p-4 transition-all hover:bg-cupertino-500/60"
-                  whileHover={{ x: 10, backgroundColor: "rgba(96, 165, 250, 0.2)" }}
-                >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-400/20">
-                    <BsLinkedin className="h-6 w-6 text-blue-400" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-cupertino-200">LinkedIn</p>
-                    <p className="text-cupertino-50">linkedin.com/in/matheo-gonnet</p>
-                  </div>
-                </motion.a>
-
-                <div className="rounded-lg bg-cupertino-500/40 p-4">
+                <div className="rounded-lg bg-cupertino-500/40 p-3 sm:p-4">
                   <div className="mb-2 flex items-center space-x-2">
-                    <BsFileEarmarkPdf className="h-5 w-5 text-accent-blue" />
-                    <h3 className="text-lg font-semibold text-cupertino-50">Resume</h3>
+                    <BsFileEarmarkPdf className="h-4 w-4 sm:h-5 sm:w-5 text-accent-blue" />
+                    <h3 className="text-base sm:text-lg font-semibold text-cupertino-50">Resume</h3>
                   </div>
                   
                   <div className="grid gap-2 sm:grid-cols-2">
@@ -177,14 +220,14 @@ export default function Contact() {
                       href="/documents/gonnet_matheo_cv_fr.pdf"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center space-x-3 rounded-lg bg-cupertino-500/40 p-3 transition-all hover:bg-cupertino-500/60"
+                      className="flex items-center space-x-2 sm:space-x-3 rounded-lg bg-cupertino-500/40 p-2 sm:p-3 transition-all hover:bg-cupertino-500/60"
                       whileHover={{ scale: 1.02, backgroundColor: "rgba(96, 165, 250, 0.2)" }}
                     >
-                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-accent-blue/20">
-                        <span className="text-sm font-bold text-accent-blue">FR</span>
+                      <div className="flex h-8 w-8 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-full bg-accent-blue/20">
+                        <span className="text-xs sm:text-sm font-bold text-accent-blue">FR</span>
                       </div>
                       <div>
-                        <p className="text-sm text-cupertino-200">Version Française</p>
+                        <p className="text-xs sm:text-sm text-cupertino-200">Version Française</p>
                         <p className="text-xs text-cupertino-300">Voir le CV</p>
                       </div>
                     </motion.a>
@@ -193,14 +236,14 @@ export default function Contact() {
                       href="/documents/gonnet_matheo_cv_en.pdf"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center space-x-3 rounded-lg bg-cupertino-500/40 p-3 transition-all hover:bg-cupertino-500/60"
+                      className="flex items-center space-x-2 sm:space-x-3 rounded-lg bg-cupertino-500/40 p-2 sm:p-3 transition-all hover:bg-cupertino-500/60"
                       whileHover={{ scale: 1.02, backgroundColor: "rgba(96, 165, 250, 0.2)" }}
                     >
-                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-500/20">
-                        <span className="text-sm font-bold text-blue-500">EN</span>
+                      <div className="flex h-8 w-8 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-full bg-blue-500/20">
+                        <span className="text-xs sm:text-sm font-bold text-blue-500">EN</span>
                       </div>
                       <div>
-                        <p className="text-sm text-cupertino-200">English Version</p>
+                        <p className="text-xs sm:text-sm text-cupertino-200">English Version</p>
                         <p className="text-xs text-cupertino-300">View Resume</p>
                       </div>
                     </motion.a>
@@ -215,9 +258,10 @@ export default function Contact() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
+            className="w-full max-w-xl mx-auto lg:max-w-none"
           >
-            <div className="glass-card p-8">
-              <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="glass-card overflow-hidden p-3 sm:p-6 md:p-8">
+              <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
                 <div>
                   <label htmlFor="name" className="mb-2 block text-sm text-cupertino-200">
                     Name
