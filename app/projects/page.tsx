@@ -9,7 +9,9 @@ import {
   BsFilter, 
   BsSearch,
   BsX,
-  BsCheck2
+  BsCheck2,
+  BsTrash,
+  BsChevronDown
 } from 'react-icons/bs'
 
 interface Project {
@@ -39,6 +41,15 @@ const projects: Project[] = [
     year: "2024"
   },
   {
+    name: "Multi-Modal Classification",
+    description: "A deep learning project designed to classify data using both image and text inputs. The project involves training a CNN for image classification, an RNN for text analysis, and combining these models into a multi-modal pipeline to improve accuracy.",
+    technologies: "Python, TensorFlow, Keras, CNN, RNN, LSTM",
+    githubLink: "https://github.com/matheogonnet/multi_modal_project",
+    icon: "🧠",
+    category: "Deep Learning",
+    year: "2024"
+  },
+  {
     name: "Predict House",
     description: "A machine learning project designed to predict real estate prices based on various property features. This project involves data preprocessing, feature engineering, and applying regression models to provide accurate price predictions.",
     technologies: "Python, Scikit-Learn, Pandas, Matplotlib",
@@ -53,7 +64,7 @@ const projects: Project[] = [
     technologies: "Python, Genetic Algorithms, NumPy",
     githubLink: "https://github.com/matheogonnet/best-keyboard-layout",
     icon: "⌨️",
-    category: "Algorithm",
+    category: "Machine Learning",
     year: "2022"
   },
   {
@@ -103,6 +114,14 @@ const projects: Project[] = [
   }
 ]
 
+const techCategories = {
+  'Languages': ['Python', 'JavaScript', 'Java', 'C++', 'PHP'],
+  'Web & UI': ['Next.js', 'Tailwind CSS', 'SFML', 'Custom Tkinter'],
+  'Data & ML': ['TensorFlow', 'Keras', 'Scikit-Learn', 'Pandas', 'NumPy', 'Matplotlib', 'Power BI', 'Power Query'],
+  'Databases': ['MySQL', 'Supabase', 'JDBC'],
+  'Other': ['Genetic Algorithms', 'OS Libraries', 'CNN', 'RNN', 'LSTM']
+}
+
 const FilterPopup = ({ 
   isOpen, 
   onClose,
@@ -118,6 +137,7 @@ const FilterPopup = ({
   searchTerm: string
   setSearchTerm: (term: string) => void
 }) => {
+  const [expandedTechCategory, setExpandedTechCategory] = useState<string | null>(null)
   const allCategories = Array.from(new Set(projects.map(p => p.category)))
   const allTechnologies = Array.from(new Set(projects.flatMap(p => p.technologies.split(', '))))
   const allYears = Array.from(new Set(projects.map(p => p.year)))
@@ -132,97 +152,184 @@ const FilterPopup = ({
     }))
   }
 
+  const resetFilters = () => {
+    setFilters({
+      categories: [],
+      technologies: [],
+      years: []
+    })
+    setSearchTerm('')
+  }
+
+  const hasActiveFilters = filters.categories.length > 0 || 
+                          filters.technologies.length > 0 ||
+                          filters.years.length > 0 ||
+                          searchTerm.length > 0
+
   return (
     <AnimatePresence>
       {isOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          className="absolute right-4 top-24 z-50 w-72 rounded-xl bg-cupertino-500/95 p-4 backdrop-blur-xl"
-        >
-          <div className="mb-4 flex items-center justify-between">
-            <h3 className="text-lg font-semibold text-cupertino-50">Filters</h3>
-            <button
-              onClick={onClose}
-              className="rounded-full p-1 text-cupertino-200 hover:bg-cupertino-400/30"
-            >
-              <BsX className="h-5 w-5" />
-            </button>
-          </div>
-
-          <div className="mb-4">
-            <div className="relative">
-              <input
-                type="text"
-                placeholder="Search projects..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full rounded-lg bg-cupertino-400/30 px-4 py-2 pl-10 text-sm text-cupertino-50 placeholder-cupertino-300 focus:outline-none focus:ring-1 focus:ring-accent-blue"
-              />
-              <BsSearch className="absolute left-3 top-2.5 h-4 w-4 text-cupertino-300" />
-            </div>
-          </div>
-
-          <div className="space-y-4">
-            <div>
-              <h4 className="mb-2 text-sm font-medium text-cupertino-200">Category</h4>
-              <div className="flex flex-wrap gap-2">
-                {allCategories.map((category) => (
+        <>
+          {/* Overlay pour fermer sur mobile */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-40 bg-black/20 backdrop-blur-sm md:hidden"
+            onClick={onClose}
+          />
+          
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="fixed md:absolute left-4 right-4 md:left-auto md:right-4 top-20 z-50 mx-auto max-w-md md:max-w-[20rem] overflow-hidden rounded-xl bg-gradient-to-br from-cupertino-500/95 to-cupertino-600/95 backdrop-blur-xl shadow-xl"
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-accent-blue/5 to-blue-500/5" />
+            
+            <div className="relative p-4">
+              <div className="mb-4 flex items-center justify-between">
+                <div className="flex items-center space-x-2">
+                  <BsFilter className="h-5 w-5 text-accent-blue" />
+                  <h3 className="text-lg font-semibold text-cupertino-50">Filters</h3>
+                </div>
+                <div className="flex items-center space-x-2">
+                  {hasActiveFilters && (
+                    <motion.button
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      onClick={resetFilters}
+                      className="flex items-center space-x-1 rounded-full bg-accent-blue/10 px-3 py-1 text-xs text-accent-blue hover:bg-accent-blue/20"
+                    >
+                      <BsTrash className="h-3 w-3" />
+                      <span>Reset</span>
+                    </motion.button>
+                  )}
                   <button
-                    key={category}
-                    onClick={() => toggleFilter('categories', category)}
-                    className={`rounded-full px-3 py-1 text-xs transition-all ${
-                      filters.categories.includes(category)
-                        ? 'bg-accent-blue text-white'
-                        : 'bg-cupertino-400/30 text-cupertino-200 hover:bg-cupertino-400/50'
-                    }`}
+                    onClick={onClose}
+                    className="rounded-full bg-cupertino-400/20 p-1 text-cupertino-200 hover:bg-cupertino-400/30 hover:text-accent-blue"
                   >
-                    {category}
+                    <BsX className="h-5 w-5" />
                   </button>
-                ))}
+                </div>
+              </div>
+
+              <div className="mb-4">
+                <div className="relative">
+                  <input
+                    type="text"
+                    placeholder="Search projects..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="w-full rounded-lg bg-cupertino-400/20 px-4 py-2 pl-10 text-sm text-cupertino-50 placeholder-cupertino-300 ring-1 ring-accent-blue/10 transition-all focus:outline-none focus:ring-2 focus:ring-accent-blue/50"
+                  />
+                  <BsSearch className="absolute left-3 top-2.5 h-4 w-4 text-accent-blue" />
+                </div>
+              </div>
+
+              <div className="space-y-4 max-h-[60vh] overflow-y-auto pr-2 scrollbar-thin scrollbar-track-cupertino-400/20 scrollbar-thumb-accent-blue/20 hover:scrollbar-thumb-accent-blue/40">
+                <div>
+                  <h4 className="mb-2 flex items-center space-x-2 text-sm font-medium text-accent-blue">
+                    <span>Category</span>
+                    <div className="h-px flex-1 bg-gradient-to-r from-accent-blue/20 to-transparent" />
+                  </h4>
+                  <div className="flex flex-wrap gap-2">
+                    {allCategories.map((category) => (
+                      <button
+                        key={category}
+                        onClick={() => toggleFilter('categories', category)}
+                        className={`rounded-full px-3 py-1 text-xs transition-all ${
+                          filters.categories.includes(category)
+                            ? 'bg-gradient-to-r from-accent-blue to-blue-500 text-white shadow-lg shadow-accent-blue/20'
+                            : 'bg-cupertino-400/20 text-cupertino-200 hover:bg-accent-blue/10 hover:text-accent-blue'
+                        }`}
+                      >
+                        {category}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <h4 className="mb-2 flex items-center space-x-2 text-sm font-medium text-accent-blue">
+                    <span>Technology</span>
+                    <div className="h-px flex-1 bg-gradient-to-r from-accent-blue/20 to-transparent" />
+                  </h4>
+                  <div className="space-y-2">
+                    {Object.entries(techCategories).map(([category, techs]) => (
+                      <div key={category} className="overflow-hidden rounded-lg bg-gradient-to-br from-cupertino-400/10 to-cupertino-400/5">
+                        <button
+                          onClick={() => setExpandedTechCategory(
+                            expandedTechCategory === category ? null : category
+                          )}
+                          className="flex w-full items-center justify-between p-2 text-sm text-cupertino-100 transition-colors hover:text-accent-blue"
+                        >
+                          <span>{category}</span>
+                          <motion.div
+                            animate={{ rotate: expandedTechCategory === category ? 180 : 0 }}
+                            transition={{ duration: 0.2 }}
+                            className="text-accent-blue"
+                          >
+                            <BsChevronDown className="h-4 w-4" />
+                          </motion.div>
+                        </button>
+                        <AnimatePresence>
+                          {expandedTechCategory === category && (
+                            <motion.div
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: "auto", opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              transition={{ duration: 0.2 }}
+                              className="overflow-hidden"
+                            >
+                              <div className="flex flex-wrap gap-2 p-2 pt-0">
+                                {techs.filter(tech => allTechnologies.includes(tech)).map((tech) => (
+                                  <button
+                                    key={tech}
+                                    onClick={() => toggleFilter('technologies', tech)}
+                                    className={`rounded-full px-3 py-1 text-xs transition-all ${
+                                      filters.technologies.includes(tech)
+                                        ? 'bg-gradient-to-r from-accent-blue to-blue-500 text-white shadow-lg shadow-accent-blue/20'
+                                        : 'bg-cupertino-400/20 text-cupertino-200 hover:bg-accent-blue/10 hover:text-accent-blue'
+                                    }`}
+                                  >
+                                    {tech}
+                                  </button>
+                                ))}
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <h4 className="mb-2 flex items-center space-x-2 text-sm font-medium text-accent-blue">
+                    <span>Year</span>
+                    <div className="h-px flex-1 bg-gradient-to-r from-accent-blue/20 to-transparent" />
+                  </h4>
+                  <div className="flex flex-wrap gap-2">
+                    {allYears.map((year) => (
+                      <button
+                        key={year}
+                        onClick={() => toggleFilter('years', year)}
+                        className={`rounded-full px-3 py-1 text-xs transition-all ${
+                          filters.years.includes(year)
+                            ? 'bg-gradient-to-r from-accent-blue to-blue-500 text-white shadow-lg shadow-accent-blue/20'
+                            : 'bg-cupertino-400/20 text-cupertino-200 hover:bg-accent-blue/10 hover:text-accent-blue'
+                        }`}
+                      >
+                        {year}
+                      </button>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
-
-            <div>
-              <h4 className="mb-2 text-sm font-medium text-cupertino-200">Technology</h4>
-              <div className="flex flex-wrap gap-2">
-                {allTechnologies.map((tech) => (
-                  <button
-                    key={tech}
-                    onClick={() => toggleFilter('technologies', tech)}
-                    className={`rounded-full px-3 py-1 text-xs transition-all ${
-                      filters.technologies.includes(tech)
-                        ? 'bg-accent-blue text-white'
-                        : 'bg-cupertino-400/30 text-cupertino-200 hover:bg-cupertino-400/50'
-                    }`}
-                  >
-                    {tech}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <h4 className="mb-2 text-sm font-medium text-cupertino-200">Year</h4>
-              <div className="flex flex-wrap gap-2">
-                {allYears.map((year) => (
-                  <button
-                    key={year}
-                    onClick={() => toggleFilter('years', year)}
-                    className={`rounded-full px-3 py-1 text-xs transition-all ${
-                      filters.years.includes(year)
-                        ? 'bg-accent-blue text-white'
-                        : 'bg-cupertino-400/30 text-cupertino-200 hover:bg-cupertino-400/50'
-                    }`}
-                  >
-                    {year}
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
-        </motion.div>
+          </motion.div>
+        </>
       )}
     </AnimatePresence>
   )
@@ -285,9 +392,9 @@ export default function Projects() {
             My Projects
           </motion.h1>
 
-          <div className="relative hidden md:block">
+          <div className="relative z-50">
             <motion.div
-              className="absolute -inset-[2px] rounded-full bg-accent-blue/30 blur-sm"
+              className="absolute -inset-[2px] rounded-full bg-accent-blue/30 blur-sm hidden md:block"
               animate={{
                 opacity: [0.2, 0.5, 0.2],
                 scale: [0.95, 1.05, 0.95],
@@ -317,20 +424,6 @@ export default function Projects() {
               searchTerm={searchTerm}
               setSearchTerm={setSearchTerm}
             />
-          </div>
-
-          {/* Version mobile du bouton de filtre */}
-          <div className="md:hidden">
-            <motion.button
-              onClick={() => setIsFilterOpen(!isFilterOpen)}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className={`flex h-10 w-10 items-center justify-center rounded-full transition-colors ${
-                hasActiveFilters ? 'bg-accent-blue text-white' : 'bg-cupertino-500/40 text-cupertino-200 hover:bg-cupertino-500/60'
-              }`}
-            >
-              {hasActiveFilters ? <BsCheck2 className="h-5 w-5" /> : <BsFilter className="h-5 w-5" />}
-            </motion.button>
           </div>
         </div>
 
