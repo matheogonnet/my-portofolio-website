@@ -3,7 +3,7 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
 import Navigation from '@/components/Navigation'
-import { BsEnvelope, BsLinkedin, BsGithub, BsCheckCircle, BsExclamationCircle, BsFileEarmarkPdf, BsGlobe } from 'react-icons/bs'
+import { BsEnvelope, BsLinkedin, BsGithub, BsCheckCircle, BsExclamationCircle, BsFileEarmarkPdf, BsGlobe, BsArrowRightCircle } from 'react-icons/bs'
 
 interface FormData {
   name: string
@@ -97,9 +97,24 @@ export default function Contact() {
             transition={{ duration: 0.8 }}
           >
             <div className="glass-card p-8">
-              <h1 className="mb-6 text-4xl font-bold tracking-tight text-cupertino-50">
-                Get in Touch
-              </h1>
+              <div className="flex items-center space-x-3 mb-6">
+                <h1 className="text-4xl font-bold tracking-tight text-cupertino-50">
+                  Get in Touch
+                </h1>
+                <motion.div
+                  animate={{
+                    x: [0, 5, 0],
+                    rotate: [0, 10, 0]
+                  }}
+                  transition={{
+                    duration: 1.5,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                >
+                  <BsArrowRightCircle className="h-8 w-8 text-accent-blue" />
+                </motion.div>
+              </div>
               <p className="mb-8 text-lg text-cupertino-200">
                 Feel free to reach out! I'm always open to discussing new projects, opportunities, or just having a chat.
               </p>
