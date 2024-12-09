@@ -11,6 +11,7 @@ interface Message {
   timestamp: Date
   isError?: boolean
   isHtml?: boolean
+  isTyping?: boolean
 }
 
 export default function Chatbot() {
@@ -35,6 +36,61 @@ export default function Chatbot() {
     scrollToBottom()
   }, [messages])
 
+  // Format message with both bold text and links
+  const formatMessage = (text: string) => {
+    // First, protect HTML tags from being split
+    const protectedText = text.replace(/<[^>]+>/g, match => match.replace(/\*\*/g, '§§'));
+    
+    // Split by bold markers
+    const parts = protectedText.split(/(\*\*.*?\*\*)/g);
+    
+    return parts.map((part, index) => {
+      // Restore protected markers in HTML
+      const restoredPart = part.replace(/§§/g, '**');
+      
+      if (part.startsWith('**') && part.endsWith('**')) {
+        // Handle bold text
+        const word = part.slice(2, -2);
+        return <span key={index} className="font-bold text-accent-blue">{word}</span>;
+      } else if (restoredPart.includes('<a href=')) {
+        // Handle links
+        return (
+          <span
+            key={index}
+            dangerouslySetInnerHTML={{
+              __html: restoredPart.replace(
+                /<a href=/g,
+                '<a class="text-accent-blue hover:underline" target="_blank" rel="noopener noreferrer" href='
+              )
+            }}
+          />
+        );
+      }
+      return restoredPart;
+    });
+  };
+
+  // Typing effect component
+  const TypingIndicator = () => (
+    <div className="flex space-x-2 p-2">
+      <motion.div
+        className="h-2 w-2 rounded-full bg-accent-blue/40"
+        animate={{ scale: [1, 1.2, 1] }}
+        transition={{ duration: 0.6, repeat: Infinity, repeatDelay: 0.2 }}
+      />
+      <motion.div
+        className="h-2 w-2 rounded-full bg-accent-blue/40"
+        animate={{ scale: [1, 1.2, 1] }}
+        transition={{ duration: 0.6, repeat: Infinity, repeatDelay: 0.2, delay: 0.2 }}
+      />
+      <motion.div
+        className="h-2 w-2 rounded-full bg-accent-blue/40"
+        animate={{ scale: [1, 1.2, 1] }}
+        transition={{ duration: 0.6, repeat: Infinity, repeatDelay: 0.2, delay: 0.4 }}
+      />
+    </div>
+  )
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!newMessage.trim() || isLoading) return
@@ -50,6 +106,17 @@ export default function Chatbot() {
       timestamp: new Date()
     }
     setMessages(prev => [...prev, userMessage])
+
+    // Add typing indicator message
+    const typingMessage: Message = {
+      id: messages.length + 2,
+      text: "",
+      isBot: true,
+      timestamp: new Date(),
+      isTyping: true
+    }
+    setMessages(prev => [...prev, typingMessage])
+    
     setNewMessage("")
     setIsLoading(true)
 
@@ -71,19 +138,21 @@ export default function Chatbot() {
         throw new Error(data.error || 'Failed to get response')
       }
 
-      // Check if response contains HTML-like content
-      const hasHtml = data.reply.includes('<a href=') || data.reply.includes('<br>')
-
+      // Remove typing indicator and add actual response
+      setMessages(prev => prev.filter(msg => !msg.isTyping))
+      
       const botMessage: Message = {
         id: messages.length + 2,
         text: data.reply,
         isBot: true,
-        timestamp: new Date(),
-        isHtml: hasHtml
+        timestamp: new Date()
       }
       setMessages(prev => [...prev, botMessage])
     } catch (error) {
       console.error('Chat error:', error)
+      // Remove typing indicator
+      setMessages(prev => prev.filter(msg => !msg.isTyping))
+      
       const errorMessage: Message = {
         id: messages.length + 2,
         text: "I'm sorry, I'm having trouble connecting right now. Please try again later.",
@@ -168,17 +237,10 @@ export default function Chatbot() {
                           : 'bg-accent-blue text-cupertino-50'
                       }`}
                     >
-                      {message.isHtml ? (
-                        <div 
-                          dangerouslySetInnerHTML={{ 
-                            __html: message.text.replace(
-                              /<a href=/g, 
-                              '<a class="text-accent-blue hover:underline" target="_blank" rel="noopener noreferrer" href='
-                            )
-                          }} 
-                        />
+                      {message.isTyping ? (
+                        <TypingIndicator />
                       ) : (
-                        message.text
+                        formatMessage(message.text)
                       )}
                     </div>
                   </motion.div>
