@@ -17,10 +17,10 @@ const ConsoleText = ({ text, lastWord = false }: { text: string, lastWord?: bool
         transition={{ duration: 0.5 }}
         className="flex items-center space-x-2"
       >
-        <span className="text-accent-purple">{'>'}</span>
+        <span className="text-accent-blue">{'>'}</span>
         <span className="text-cupertino-200">
           {restOfText}
-          <span className="font-bold text-accent-blue">{lastWordText}</span>
+          <span className="font-bold text-blue-400">{lastWordText}</span>
         </span>
       </motion.div>
     )
@@ -33,7 +33,7 @@ const ConsoleText = ({ text, lastWord = false }: { text: string, lastWord?: bool
       transition={{ duration: 0.5 }}
       className="flex items-center space-x-2"
     >
-      <span className="text-accent-purple">{'>'}</span>
+      <span className="text-accent-blue">{'>'}</span>
       <span className="text-cupertino-200">{text}</span>
     </motion.div>
   )
@@ -45,8 +45,8 @@ export default function Home() {
       {/* Background gradient elements */}
       <div className="pointer-events-none absolute inset-0 z-0">
         <div className="absolute -left-40 -top-40 h-80 w-80 rounded-full bg-accent-blue/20 blur-[100px]" />
-        <div className="absolute -right-40 top-1/3 h-80 w-80 rounded-full bg-accent-purple/20 blur-[100px]" />
-        <div className="absolute bottom-0 left-1/3 h-80 w-80 rounded-full bg-accent-indigo/20 blur-[100px]" />
+        <div className="absolute -right-40 top-1/3 h-80 w-80 rounded-full bg-blue-500/20 blur-[100px]" />
+        <div className="absolute bottom-0 left-1/3 h-80 w-80 rounded-full bg-blue-400/20 blur-[100px]" />
       </div>
 
       <Navigation />
@@ -86,7 +86,7 @@ export default function Home() {
                   <motion.div
                     animate={{ opacity: [1, 0] }}
                     transition={{ duration: 0.8, repeat: Infinity }}
-                    className="mt-1 h-4 w-2 bg-accent-purple"
+                    className="mt-1 h-4 w-2 bg-accent-blue"
                   />
                 </div>
               </div>

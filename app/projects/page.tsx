@@ -71,8 +71,8 @@ export default function Projects() {
       {/* Background gradient elements */}
       <div className="pointer-events-none absolute inset-0 z-0">
         <div className="absolute -left-40 -top-40 h-80 w-80 rounded-full bg-accent-blue/20 blur-[100px]" />
-        <div className="absolute -right-40 top-1/3 h-80 w-80 rounded-full bg-accent-purple/20 blur-[100px]" />
-        <div className="absolute bottom-0 left-1/3 h-80 w-80 rounded-full bg-accent-indigo/20 blur-[100px]" />
+        <div className="absolute -right-40 top-1/3 h-80 w-80 rounded-full bg-blue-500/20 blur-[100px]" />
+        <div className="absolute bottom-0 left-1/3 h-80 w-80 rounded-full bg-blue-400/20 blur-[100px]" />
       </div>
 
       <Navigation />
@@ -93,10 +93,20 @@ export default function Projects() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
-              whileHover={{ scale: 1.02 }}
-              className="group relative"
+              whileHover={{ 
+                scale: 1.02,
+                backgroundColor: "rgba(96, 165, 250, 0.1)"
+              }}
+              className="group relative rounded-xl"
             >
-              <div className="glass-card h-full overflow-hidden p-6">
+              <motion.div
+                className="absolute -inset-0.5 rounded-xl bg-gradient-to-r from-accent-blue/30 to-blue-400/30 opacity-0 blur transition duration-300 group-hover:opacity-100"
+                initial={false}
+                animate={{ opacity: 0 }}
+                whileHover={{ opacity: 1 }}
+              />
+              
+              <div className="glass-card relative h-full overflow-hidden p-6">
                 <div className="mb-4 flex items-center justify-between">
                   <div className="flex items-center space-x-3">
                     <span className="text-3xl">{project.icon}</span>
@@ -108,7 +118,7 @@ export default function Projects() {
                     href={project.githubLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="rounded-full bg-cupertino-500/40 p-2 transition-colors hover:bg-cupertino-500/60"
+                    className="rounded-full bg-cupertino-500/40 p-2 transition-all hover:bg-cupertino-500/60 hover:scale-110"
                   >
                     <BsGithub className="h-5 w-5 text-cupertino-200" />
                   </Link>
@@ -119,7 +129,7 @@ export default function Projects() {
                 </p>
 
                 <div className="mt-auto">
-                  <h3 className="mb-2 font-semibold text-accent-purple">
+                  <h3 className="mb-2 font-semibold text-accent-blue">
                     Technologies
                   </h3>
                   <p className="text-sm text-cupertino-300">

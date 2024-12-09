@@ -82,8 +82,8 @@ export default function Contact() {
       {/* Background gradient elements */}
       <div className="pointer-events-none absolute inset-0 z-0">
         <div className="absolute -left-40 -top-40 h-80 w-80 rounded-full bg-accent-blue/20 blur-[100px]" />
-        <div className="absolute -right-40 top-1/3 h-80 w-80 rounded-full bg-accent-purple/20 blur-[100px]" />
-        <div className="absolute bottom-0 left-1/3 h-80 w-80 rounded-full bg-accent-indigo/20 blur-[100px]" />
+        <div className="absolute -right-40 top-1/3 h-80 w-80 rounded-full bg-blue-500/20 blur-[100px]" />
+        <div className="absolute bottom-0 left-1/3 h-80 w-80 rounded-full bg-blue-400/20 blur-[100px]" />
       </div>
 
       <Navigation />
@@ -108,7 +108,7 @@ export default function Contact() {
                 <motion.a
                   href="mailto:matheo.gonnet@yahoo.fr"
                   className="flex items-center space-x-4 rounded-lg bg-cupertino-500/40 p-4 transition-all hover:bg-cupertino-500/60"
-                  whileHover={{ x: 10 }}
+                  whileHover={{ x: 10, backgroundColor: "rgba(96, 165, 250, 0.2)" }}
                 >
                   <div className="flex h-12 w-12 items-center justify-center rounded-full bg-accent-blue/20">
                     <BsEnvelope className="h-6 w-6 text-accent-blue" />
@@ -124,10 +124,10 @@ export default function Contact() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center space-x-4 rounded-lg bg-cupertino-500/40 p-4 transition-all hover:bg-cupertino-500/60"
-                  whileHover={{ x: 10 }}
+                  whileHover={{ x: 10, backgroundColor: "rgba(96, 165, 250, 0.2)" }}
                 >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-accent-indigo/20">
-                    <BsGithub className="h-6 w-6 text-accent-indigo" />
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-500/20">
+                    <BsGithub className="h-6 w-6 text-blue-500" />
                   </div>
                   <div>
                     <p className="text-sm text-cupertino-200">GitHub</p>
@@ -140,10 +140,10 @@ export default function Contact() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center space-x-4 rounded-lg bg-cupertino-500/40 p-4 transition-all hover:bg-cupertino-500/60"
-                  whileHover={{ x: 10 }}
+                  whileHover={{ x: 10, backgroundColor: "rgba(96, 165, 250, 0.2)" }}
                 >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-accent-purple/20">
-                    <BsLinkedin className="h-6 w-6 text-accent-purple" />
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-400/20">
+                    <BsLinkedin className="h-6 w-6 text-blue-400" />
                   </div>
                   <div>
                     <p className="text-sm text-cupertino-200">LinkedIn</p>
@@ -153,7 +153,7 @@ export default function Contact() {
 
                 <div className="rounded-lg bg-cupertino-500/40 p-4">
                   <div className="mb-2 flex items-center space-x-2">
-                    <BsFileEarmarkPdf className="h-5 w-5 text-accent-indigo" />
+                    <BsFileEarmarkPdf className="h-5 w-5 text-accent-blue" />
                     <h3 className="text-lg font-semibold text-cupertino-50">Resume</h3>
                   </div>
                   
@@ -163,7 +163,7 @@ export default function Contact() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center space-x-3 rounded-lg bg-cupertino-500/40 p-3 transition-all hover:bg-cupertino-500/60"
-                      whileHover={{ scale: 1.02 }}
+                      whileHover={{ scale: 1.02, backgroundColor: "rgba(96, 165, 250, 0.2)" }}
                     >
                       <div className="flex h-10 w-10 items-center justify-center rounded-full bg-accent-blue/20">
                         <span className="text-sm font-bold text-accent-blue">FR</span>
@@ -179,10 +179,10 @@ export default function Contact() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center space-x-3 rounded-lg bg-cupertino-500/40 p-3 transition-all hover:bg-cupertino-500/60"
-                      whileHover={{ scale: 1.02 }}
+                      whileHover={{ scale: 1.02, backgroundColor: "rgba(96, 165, 250, 0.2)" }}
                     >
-                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-accent-purple/20">
-                        <span className="text-sm font-bold text-accent-purple">EN</span>
+                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-500/20">
+                        <span className="text-sm font-bold text-blue-500">EN</span>
                       </div>
                       <div>
                         <p className="text-sm text-cupertino-200">English Version</p>
@@ -216,7 +216,7 @@ export default function Contact() {
                     onChange={handleChange}
                     required
                     className={`w-full rounded-lg bg-cupertino-500/40 px-4 py-2 text-cupertino-50 outline-none transition-all focus:bg-cupertino-500/60 focus:ring-2 ${
-                      formErrors.name ? 'ring-2 ring-red-500' : 'ring-accent-blue'
+                      formErrors.name ? 'ring-2 ring-blue-500' : 'ring-accent-blue'
                     }`}
                     placeholder="Your name"
                   />
@@ -226,7 +226,7 @@ export default function Contact() {
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
-                        className="mt-2 flex items-center space-x-1 text-sm text-red-500"
+                        className="mt-2 flex items-center space-x-1 text-sm text-blue-500"
                       >
                         <BsExclamationCircle className="h-4 w-4" />
                         <span>{formErrors.name}</span>
@@ -248,9 +248,9 @@ export default function Contact() {
                     onChange={handleChange}
                     required
                     className={`w-full rounded-lg bg-cupertino-500/40 px-4 py-2 text-cupertino-50 outline-none transition-all focus:bg-cupertino-500/60 focus:ring-2 ${
-                      formErrors.email ? 'ring-2 ring-red-500' : 'ring-accent-blue'
+                      formErrors.email ? 'ring-2 ring-blue-500' : 'ring-accent-blue'
                     }`}
-                    placeholder="your@email.com"
+                    placeholder="Your email"
                   />
                   <AnimatePresence>
                     {formErrors.email && (
@@ -258,7 +258,7 @@ export default function Contact() {
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
-                        className="mt-2 flex items-center space-x-1 text-sm text-red-500"
+                        className="mt-2 flex items-center space-x-1 text-sm text-blue-500"
                       >
                         <BsExclamationCircle className="h-4 w-4" />
                         <span>{formErrors.email}</span>
@@ -280,9 +280,9 @@ export default function Contact() {
                     required
                     rows={4}
                     className={`w-full rounded-lg bg-cupertino-500/40 px-4 py-2 text-cupertino-50 outline-none transition-all focus:bg-cupertino-500/60 focus:ring-2 ${
-                      formErrors.message ? 'ring-2 ring-red-500' : 'ring-accent-blue'
+                      formErrors.message ? 'ring-2 ring-blue-500' : 'ring-accent-blue'
                     }`}
-                    placeholder="Your message..."
+                    placeholder="Your message"
                   />
                   <AnimatePresence>
                     {formErrors.message && (
@@ -290,7 +290,7 @@ export default function Contact() {
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
-                        className="mt-2 flex items-center space-x-1 text-sm text-red-500"
+                        className="mt-2 flex items-center space-x-1 text-sm text-blue-500"
                       >
                         <BsExclamationCircle className="h-4 w-4" />
                         <span>{formErrors.message}</span>
@@ -302,37 +302,36 @@ export default function Contact() {
                 <motion.button
                   type="submit"
                   disabled={isSubmitting}
-                  className="group relative w-full overflow-hidden rounded-lg bg-gradient-to-r from-accent-blue to-accent-purple p-[1px]"
-                  whileHover={{ scale: 1.01 }}
-                  whileTap={{ scale: 0.99 }}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className={`w-full rounded-lg bg-accent-blue px-6 py-3 font-semibold text-cupertino-50 transition-all hover:bg-blue-500 disabled:opacity-50`}
                 >
-                  <span className="block rounded-lg bg-cupertino-600 px-8 py-2 text-center font-medium transition-all group-hover:bg-transparent">
-                    {isSubmitting ? 'Sending...' : 'Send Message'}
-                  </span>
+                  {isSubmitting ? 'Sending...' : 'Send Message'}
                 </motion.button>
 
                 <AnimatePresence>
-                  {submitStatus === 'success' && (
+                  {submitStatus !== 'idle' && (
                     <motion.div
-                      initial={{ opacity: 0, y: 10 }}
+                      initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 10 }}
-                      className="flex items-center space-x-2 rounded-lg bg-green-500/10 p-3 text-green-500"
+                      exit={{ opacity: 0, y: -10 }}
+                      className={`mt-4 flex items-center space-x-2 rounded-lg p-3 ${
+                        submitStatus === 'success'
+                          ? 'bg-green-500/20 text-green-400'
+                          : 'bg-red-500/20 text-red-400'
+                      }`}
                     >
-                      <BsCheckCircle className="h-5 w-5" />
-                      <span>Message sent successfully! I'll get back to you soon.</span>
-                    </motion.div>
-                  )}
-
-                  {submitStatus === 'error' && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 10 }}
-                      className="flex items-center space-x-2 rounded-lg bg-red-500/10 p-3 text-red-500"
-                    >
-                      <BsExclamationCircle className="h-5 w-5" />
-                      <span>Oops! Something went wrong. Please try again.</span>
+                      {submitStatus === 'success' ? (
+                        <>
+                          <BsCheckCircle className="h-5 w-5" />
+                          <span>Message sent successfully!</span>
+                        </>
+                      ) : (
+                        <>
+                          <BsExclamationCircle className="h-5 w-5" />
+                          <span>Failed to send message. Please try again.</span>
+                        </>
+                      )}
                     </motion.div>
                   )}
                 </AnimatePresence>

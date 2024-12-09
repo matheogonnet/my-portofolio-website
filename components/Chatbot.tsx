@@ -132,7 +132,7 @@ export default function Chatbot() {
             {/* Chat Header */}
             <div className="flex items-center justify-between border-b border-cupertino-500/30 p-4">
               <div className="flex items-center space-x-2">
-                <BsRobot className="h-6 w-6 text-accent-purple" />
+                <BsRobot className="h-6 w-6 text-accent-blue" />
                 <h2 className="font-['Manifesto'] text-xl text-cupertino-50">Ask Me Anything!</h2>
               </div>
               <button
@@ -159,7 +159,7 @@ export default function Chatbot() {
                           ? message.isError
                             ? 'bg-red-500/20 text-red-200'
                             : 'bg-cupertino-500/40 text-cupertino-200'
-                          : 'bg-accent-purple text-cupertino-50'
+                          : 'bg-accent-blue text-cupertino-50'
                       }`}
                     >
                       {message.isHtml ? (
@@ -167,7 +167,7 @@ export default function Chatbot() {
                           dangerouslySetInnerHTML={{ 
                             __html: message.text.replace(
                               /<a href=/g, 
-                              '<a class="text-accent-purple hover:underline" target="_blank" rel="noopener noreferrer" href='
+                              '<a class="text-accent-blue hover:underline" target="_blank" rel="noopener noreferrer" href='
                             )
                           }} 
                         />
@@ -190,11 +190,11 @@ export default function Chatbot() {
                   onChange={(e) => setNewMessage(e.target.value)}
                   placeholder={isLoading ? "Waiting for response..." : "Type your message..."}
                   disabled={isLoading}
-                  className="flex-1 rounded-full bg-cupertino-500/40 px-4 py-2 text-cupertino-50 placeholder-cupertino-300 outline-none ring-accent-purple transition-shadow focus:ring-2 disabled:opacity-50"
+                  className="flex-1 rounded-full bg-cupertino-500/40 px-4 py-2 text-cupertino-50 placeholder-cupertino-300 outline-none ring-accent-blue transition-shadow focus:ring-2 disabled:opacity-50"
                 />
                 <button
                   type="submit"
-                  className="flex h-10 w-10 items-center justify-center rounded-full bg-accent-purple text-cupertino-50 transition-transform hover:scale-105 disabled:opacity-50"
+                  className="flex h-10 w-10 items-center justify-center rounded-full bg-accent-blue text-cupertino-50 transition-transform hover:scale-105 disabled:opacity-50"
                   disabled={!newMessage.trim() || isLoading}
                 >
                   <BsSend className="h-4 w-4" />
@@ -208,7 +208,7 @@ export default function Chatbot() {
       {/* Chat Bubble */}
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex h-14 w-14 items-center justify-center rounded-full bg-accent-purple text-cupertino-50 shadow-lg transition-colors hover:bg-accent-purple/90"
+        className="flex h-14 w-14 items-center justify-center rounded-full bg-accent-blue text-cupertino-50 shadow-lg transition-colors hover:bg-accent-blue/90"
         variants={bubbleVariants}
         animate={isOpen ? "idle" : "attention"}
         whileHover={{ scale: 1.05 }}
@@ -217,7 +217,7 @@ export default function Chatbot() {
         <BsRobot className="h-6 w-6" />
         {!isOpen && (
           <motion.div
-            className="absolute -right-1 -top-1 h-3 w-3 rounded-full bg-accent-blue"
+            className="absolute -right-1 -top-1 h-3 w-3 rounded-full bg-blue-400"
             animate={{
               scale: [1, 1.2, 1],
               opacity: [1, 0.5, 1]

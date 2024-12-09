@@ -79,8 +79,8 @@ export default function Experiences() {
       {/* Background gradient elements */}
       <div className="pointer-events-none absolute inset-0 z-0">
         <div className="absolute -left-40 -top-40 h-80 w-80 rounded-full bg-accent-blue/20 blur-[100px]" />
-        <div className="absolute -right-40 top-1/3 h-80 w-80 rounded-full bg-accent-purple/20 blur-[100px]" />
-        <div className="absolute bottom-0 left-1/3 h-80 w-80 rounded-full bg-accent-indigo/20 blur-[100px]" />
+        <div className="absolute -right-40 top-1/3 h-80 w-80 rounded-full bg-blue-500/20 blur-[100px]" />
+        <div className="absolute bottom-0 left-1/3 h-80 w-80 rounded-full bg-blue-400/20 blur-[100px]" />
       </div>
 
       <Navigation />
@@ -105,9 +105,9 @@ export default function Experiences() {
                   repeat: Infinity,
                   ease: "easeInOut"
                 }}
-                className="flex h-12 w-12 items-center justify-center rounded-full bg-accent-purple/20"
+                className="flex h-12 w-12 items-center justify-center rounded-full bg-accent-blue/20"
               >
-                <BsThreeDots className="h-6 w-6 text-accent-purple" />
+                <BsThreeDots className="h-6 w-6 text-accent-blue" />
               </motion.div>
               <div>
                 <h2 className="text-2xl font-bold text-cupertino-50">🚀 Next Experience is Loading...</h2>
@@ -115,7 +115,7 @@ export default function Experiences() {
                   className="mt-2 h-1 w-32 overflow-hidden rounded-full bg-cupertino-500/40"
                 >
                   <motion.div
-                    className="h-full bg-accent-purple"
+                    className="h-full bg-accent-blue"
                     animate={{
                       x: [-100, 100],
                     }}
@@ -139,23 +139,31 @@ export default function Experiences() {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: index * 0.1 }}
-              whileHover={{ scale: 1.02 }}
+              whileHover={{ 
+                scale: 1.02,
+                backgroundColor: "rgba(96, 165, 250, 0.1)"
+              }}
               className="glass-card transform-gpu overflow-hidden p-8"
             >
               <div className="flex items-start space-x-4">
                 <div className="flex h-12 w-12 items-center justify-center rounded-full bg-accent-blue/20">
-                  {experience.icon}
+                  <motion.div
+                    className="text-accent-blue"
+                    whileHover={{ scale: 1.1 }}
+                  >
+                    {experience.icon}
+                  </motion.div>
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center justify-between">
                     <h3 className="text-xl font-bold text-cupertino-50">
                       {experience.title}
                     </h3>
-                    <span className="rounded-full bg-accent-purple/10 px-3 py-1 text-sm text-accent-purple">
+                    <span className="rounded-full bg-accent-blue/10 px-3 py-1 text-sm text-accent-blue">
                       {experience.year}
                     </span>
                   </div>
-                  <p className="mt-1 text-lg text-accent-blue">{experience.company}</p>
+                  <p className="mt-1 text-lg text-blue-400">{experience.company}</p>
                   <ul className="mt-4 list-inside list-disc space-y-2 text-cupertino-200">
                     {experience.description.map((item, i) => (
                       <li key={i}>{item}</li>

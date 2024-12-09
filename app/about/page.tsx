@@ -67,8 +67,8 @@ export default function About() {
       {/* Background gradient elements */}
       <div className="pointer-events-none absolute inset-0 z-0">
         <div className="absolute -left-40 -top-40 h-80 w-80 rounded-full bg-accent-blue/20 blur-[100px]" />
-        <div className="absolute -right-40 top-1/3 h-80 w-80 rounded-full bg-accent-purple/20 blur-[100px]" />
-        <div className="absolute bottom-0 left-1/3 h-80 w-80 rounded-full bg-accent-indigo/20 blur-[100px]" />
+        <div className="absolute -right-40 top-1/3 h-80 w-80 rounded-full bg-blue-500/20 blur-[100px]" />
+        <div className="absolute bottom-0 left-1/3 h-80 w-80 rounded-full bg-blue-400/20 blur-[100px]" />
       </div>
 
       <Navigation />
@@ -82,7 +82,7 @@ export default function About() {
               <div className="relative">
                 {/* Animated halo effect */}
                 <motion.div
-                  className="absolute -inset-[2px] rounded-lg bg-gradient-to-r from-accent-blue/30 via-accent-purple/30 to-accent-indigo/30 blur-sm"
+                  className="absolute -inset-[2px] rounded-lg bg-gradient-to-r from-accent-blue/30 via-blue-500/30 to-blue-400/30 blur-sm"
                   animate={{
                     opacity: [0.5, 0.8, 0.5],
                   }}
@@ -97,7 +97,8 @@ export default function About() {
                     About Me
                   </h1>
                   <p className="text-lg text-cupertino-200">
-                  Hi! 👋 I'm Mathéo Gonnet, a 22-year-old student pursuing a Master's in Data & Artificial Intelligence at ECE Paris. Passionate about data science, web development, and AI, I'm constantly seeking to learn and take on new challenges. 🚀                  </p>
+                    Hi! 👋 I'm Mathéo Gonnet, a 22-year-old student pursuing a Master's in Data & Artificial Intelligence at ECE Paris. Passionate about data science, web development, and AI, I'm constantly seeking to learn and take on new challenges. 🚀
+                  </p>
                 </div>
               </div>
             </FloatingElement>
@@ -115,7 +116,7 @@ export default function About() {
                       transition={{ delay: index * 0.1 }}
                       className="flex items-center rounded-lg bg-cupertino-500/40 px-4 py-2"
                     >
-                      <BsLightbulb className="mr-2 text-accent-purple" />
+                      <BsLightbulb className="mr-2 text-accent-blue" />
                       <span className="text-cupertino-100">{skill}</span>
                     </motion.div>
                   ))}
@@ -133,7 +134,7 @@ export default function About() {
                       key={index}
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
-                      whileHover={{ color: "#A78BFA" }}
+                      whileHover={{ scale: 1.05, color: "#60A5FA" }}
                       transition={{ 
                         delay: index * 0.05,
                         color: { duration: 0.1 }
@@ -163,9 +164,9 @@ export default function About() {
                       key={index}
                       initial={{ x: -20, opacity: 0 }}
                       animate={{ x: 0, opacity: 1 }}
-                      whileHover={{ scale: 1.02 }}
+                      whileHover={{ scale: 1.02, backgroundColor: "rgba(96, 165, 250, 0.2)" }}
                       transition={{ delay: index * 0.1 }}
-                      className="block rounded-lg bg-cupertino-500/40 p-4 transition-all hover:bg-cupertino-500/60 transform-gpu"
+                      className="block rounded-lg bg-cupertino-500/40 p-4 transition-all transform-gpu"
                     >
                       <h3 className="font-semibold text-accent-blue">{edu.school}</h3>
                       <p className="text-sm text-cupertino-200">{edu.period}</p>
@@ -189,7 +190,7 @@ export default function About() {
                       transition={{ delay: index * 0.1 }}
                       className="rounded-lg bg-cupertino-500/40 p-4"
                     >
-                      <h3 className="font-semibold text-accent-indigo">{interest.name}</h3>
+                      <h3 className="font-semibold text-accent-blue">{interest.name}</h3>
                       <p className="text-sm text-cupertino-200">{interest.details}</p>
                     </motion.div>
                   ))}

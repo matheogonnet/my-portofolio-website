@@ -104,7 +104,7 @@ export default function Navigation() {
           animate={{ y: 0 }}
           transition={{ type: "spring", stiffness: 300, damping: 30 }}
         >
-          <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-cupertino-200/20 to-transparent" />
+          <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-accent-blue/20 to-transparent" />
           
           <div className="container mx-auto h-full px-4">
             <div className="flex h-full items-center justify-between">
@@ -153,7 +153,7 @@ export default function Navigation() {
                           {isActive && (
                             <motion.div
                               layoutId="underline"
-                              className="absolute -bottom-1 left-0 h-0.5 w-full bg-gradient-to-r from-accent-blue to-accent-purple"
+                              className="absolute -bottom-1 left-0 h-0.5 w-full bg-gradient-to-r from-accent-blue to-blue-400"
                               initial={false}
                               transition={{
                                 type: "spring",
@@ -163,10 +163,10 @@ export default function Navigation() {
                             />
                           )}
                           <motion.div
-                            className="absolute inset-0 -z-10 rounded-lg"
-                            initial={false}
+                            className="absolute inset-0 -z-10 rounded-lg bg-gradient-to-r from-accent-blue/5 to-blue-400/5"
+                            initial={{ opacity: 0, scale: 0.95 }}
                             whileHover={{ 
-                              backgroundColor: "rgba(255, 255, 255, 0.05)",
+                              opacity: 1,
                               scale: 1.05
                             }}
                             transition={{ duration: 0.2 }}
@@ -204,7 +204,7 @@ export default function Navigation() {
                     className="relative h-5 w-5"
                   >
                     <motion.span
-                      className="absolute left-0 top-0 h-0.5 w-5 bg-gradient-to-r from-cupertino-50 to-cupertino-200"
+                      className="absolute left-0 top-0 h-0.5 w-5 bg-gradient-to-r from-accent-blue to-blue-400"
                       variants={{
                         closed: { rotate: 0, y: 0 },
                         open: { rotate: 45, y: 2 }
@@ -212,7 +212,7 @@ export default function Navigation() {
                       transition={{ duration: 0.3 }}
                     />
                     <motion.span
-                      className="absolute left-0 top-2 h-0.5 w-5 bg-gradient-to-r from-cupertino-50 to-cupertino-200"
+                      className="absolute left-0 top-2 h-0.5 w-5 bg-gradient-to-r from-accent-blue to-blue-400"
                       variants={{
                         closed: { opacity: 1, x: 0 },
                         open: { opacity: 0, x: 20 }
@@ -220,7 +220,7 @@ export default function Navigation() {
                       transition={{ duration: 0.3 }}
                     />
                     <motion.span
-                      className="absolute left-0 top-4 h-0.5 w-5 bg-gradient-to-r from-cupertino-50 to-cupertino-200"
+                      className="absolute left-0 top-4 h-0.5 w-5 bg-gradient-to-r from-accent-blue to-blue-400"
                       variants={{
                         closed: { rotate: 0, y: 0 },
                         open: { rotate: -45, y: -2 }
@@ -243,8 +243,8 @@ export default function Navigation() {
               variants={menuVariants}
               className="fixed right-4 top-[85px] h-auto max-h-[calc(90vh-85px)] w-[280px] overflow-hidden rounded-2xl bg-cupertino-600/70 shadow-lg backdrop-blur-xl md:hidden"
             >
-              <div className="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-cupertino-200/20 to-transparent" />
-              <div className="absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-transparent via-cupertino-200/20 to-transparent" />
+              <div className="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-accent-blue/20 to-transparent" />
+              <div className="absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-transparent via-accent-blue/20 to-transparent" />
               
               <motion.div 
                 className="flex h-full flex-col px-6 py-6"
@@ -272,7 +272,7 @@ export default function Navigation() {
                           }`}
                         >
                           <motion.div
-                            className="absolute inset-0 rounded-xl bg-gradient-to-r from-accent-blue/10 to-accent-purple/10"
+                            className="absolute inset-0 rounded-xl bg-gradient-to-r from-accent-blue/10 to-blue-400/10"
                             initial={false}
                             animate={{
                               opacity: isActive ? 1 : 0,

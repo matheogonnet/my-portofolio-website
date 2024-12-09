@@ -21,7 +21,7 @@ export default function Loading() {
         {/* Loading bar */}
         <div className="h-1 w-48 overflow-hidden rounded-full bg-cupertino-500/40">
           <motion.div
-            className="h-full bg-gradient-to-r from-accent-blue via-accent-purple to-accent-indigo"
+            className="h-full bg-gradient-to-r from-accent-blue via-blue-500 to-blue-400"
             initial={{ x: '-100%' }}
             animate={{ x: '100%' }}
             transition={{
@@ -37,7 +37,7 @@ export default function Loading() {
           {[0, 1, 2].map((index) => (
             <motion.div
               key={index}
-              className="h-2 w-2 rounded-full bg-accent-purple"
+              className="h-2 w-2 rounded-full bg-accent-blue"
               initial={{ scale: 0 }}
               animate={{ scale: [0, 1, 0] }}
               transition={{
@@ -54,8 +54,8 @@ export default function Loading() {
       {/* Background gradients */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute -left-40 -top-40 h-80 w-80 rounded-full bg-accent-blue/20 blur-[100px]" />
-        <div className="absolute -right-40 top-1/3 h-80 w-80 rounded-full bg-accent-purple/20 blur-[100px]" />
-        <div className="absolute bottom-0 left-1/3 h-80 w-80 rounded-full bg-accent-indigo/20 blur-[100px]" />
+        <div className="absolute -right-40 top-1/3 h-80 w-80 rounded-full bg-blue-500/20 blur-[100px]" />
+        <div className="absolute bottom-0 left-1/3 h-80 w-80 rounded-full bg-blue-400/20 blur-[100px]" />
       </div>
     </div>
   )
