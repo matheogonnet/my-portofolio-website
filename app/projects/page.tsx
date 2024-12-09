@@ -115,11 +115,12 @@ const projects: Project[] = [
 ]
 
 const techCategories = {
-  'Languages': ['Python', 'JavaScript', 'Java', 'C++', 'PHP'],
-  'Web & UI': ['Next.js', 'Tailwind CSS', 'SFML', 'Custom Tkinter'],
-  'Data & ML': ['TensorFlow', 'Keras', 'Scikit-Learn', 'Pandas', 'NumPy', 'Matplotlib', 'Power BI', 'Power Query'],
-  'Databases': ['MySQL', 'Supabase', 'JDBC'],
-  'Other': ['Genetic Algorithms', 'OS Libraries', 'CNN', 'RNN', 'LSTM']
+  'Languages': ['Python', 'Java', 'JavaScript', 'PHP', 'C++'],
+  'Frameworks/Libraries': ['TensorFlow', 'Keras', 'Scikit-Learn', 'NumPy', 'Tailwind CSS', 'Next.js', 'SFML', 'Custom Tkinter'],
+  'Databases': ['MySQL', 'JDBC', 'Supabase'],
+  'ML/DL': ['CNN', 'RNN', 'LSTM', 'Genetic Algorithms'],
+  'Analysis/Visualization': ['Power BI', 'Power Query', 'Matplotlib', 'Pandas'],
+  'Other': ['OS Libraries']
 }
 
 const FilterPopup = ({ 
