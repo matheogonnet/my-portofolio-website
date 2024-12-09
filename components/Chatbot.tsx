@@ -39,6 +39,9 @@ export default function Chatbot() {
     e.preventDefault()
     if (!newMessage.trim() || isLoading) return
 
+    // Get the last bot message for context
+    const lastBotMessage = [...messages].reverse().find(msg => msg.isBot)?.text || ""
+
     // Add user message
     const userMessage: Message = {
       id: messages.length + 1,
@@ -56,7 +59,10 @@ export default function Chatbot() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ message: newMessage }),
+        body: JSON.stringify({ 
+          message: newMessage,
+          lastBotMessage: lastBotMessage 
+        }),
       })
 
       const data = await response.json()

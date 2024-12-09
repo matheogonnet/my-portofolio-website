@@ -1,10 +1,16 @@
 import { NextResponse } from 'next/server'
 
+// Calculate age dynamically
+const birthDate = new Date('2002-04-11') // April 2002
+const currentDate = new Date()
+const age = currentDate.getFullYear() - birthDate.getFullYear()
+
 const CHAT_CONTEXT = `
 You are a helpful assistant answering questions about Mathéo Gonnet. Here's his complete profile:
 
 Personal Information:  
 - Full Name: Mathéo Gonnet 
+- Age: ${age} years old
 - Birthdate: April 2002
 - Education: Master's in Data & Artificial Intelligence at ECE Paris (2020-2025)  
 - Exchange Program: University of Malta (2023), focused on Machine Learning and Discrete Mathematics  
@@ -95,7 +101,7 @@ Example responses with links:
 
 export async function POST(request: Request) {
   try {
-    const { message } = await request.json()
+    const { message, lastBotMessage } = await request.json()
 
     if (!message) {
       return NextResponse.json(
@@ -111,6 +117,18 @@ export async function POST(request: Request) {
       )
     }
 
+    const messages = [
+      { role: 'system', content: CHAT_CONTEXT },
+    ]
+
+    // Add last bot message for context if it exists
+    if (lastBotMessage) {
+      messages.push({ role: 'assistant', content: lastBotMessage })
+    }
+
+    // Add current user message
+    messages.push({ role: 'user', content: message })
+
     const response = await fetch('https://api.chatanywhere.tech/v1/chat/completions', {
       method: 'POST',
       headers: {
@@ -119,10 +137,7 @@ export async function POST(request: Request) {
       },
       body: JSON.stringify({
         model: 'gpt-3.5-turbo',
-        messages: [
-          { role: 'system', content: CHAT_CONTEXT },
-          { role: 'user', content: message }
-        ],
+        messages: messages,
         max_tokens: 150,
         temperature: 0.7,
       }),

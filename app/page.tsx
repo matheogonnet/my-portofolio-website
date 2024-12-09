@@ -4,6 +4,11 @@ import { motion } from 'framer-motion'
 import Navigation from '@/components/Navigation'
 import Chatbot from '@/components/Chatbot'
 
+// Calculate age dynamically
+const birthDate = new Date('2002-04-11') // April 11, 2002
+const currentDate = new Date()
+const age = currentDate.getFullYear() - birthDate.getFullYear()
+
 const ConsoleText = ({ text, lastWord = false }: { text: string, lastWord?: boolean }) => {
   if (lastWord) {
     const words = text.split(' ')
@@ -81,8 +86,8 @@ export default function Home() {
                 <div className="min-w-min">
                   <ConsoleText text="C:\>" />
                   <ConsoleText text="C:\> cd Data_AI" lastWord={true} />
-                  <ConsoleText text="C:\Data_AI> cd 22yo" lastWord={true} />
-                  <ConsoleText text="C:\Data_AI\22yo> Open_to_work" lastWord={true} />
+                  <ConsoleText text={`C:\\Data_AI> cd ${age}yo`} lastWord={true} />
+                  <ConsoleText text={`C:\\Data_AI\\${age}yo> Open_to_work`} lastWord={true} />
                   <motion.div
                     animate={{ opacity: [1, 0] }}
                     transition={{ duration: 0.8, repeat: Infinity }}
