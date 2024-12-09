@@ -4,7 +4,8 @@ const CHAT_CONTEXT = `
 You are a helpful assistant answering questions about Mathéo Gonnet. Here's his complete profile:
 
 Personal Information:  
-- Full Name: Mathéo Gonnet  
+- Full Name: Mathéo Gonnet 
+- Birthdate: April 2002
 - Education: Master's in Data & Artificial Intelligence at ECE Paris (2020-2025)  
 - Exchange Program: University of Malta (2023), focused on Machine Learning and Discrete Mathematics  
 - Languages: French (native), English (fluent)  
