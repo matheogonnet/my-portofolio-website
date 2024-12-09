@@ -2,7 +2,15 @@
 
 import { motion } from 'framer-motion'
 import Navigation from '@/components/Navigation'
-import { BsCode, BsLightbulb, BsBook, BsController } from 'react-icons/bs'
+import { 
+  BsCode, 
+  BsLightbulb, 
+  BsBook, 
+  BsController,
+  BsMusicNoteBeamed,
+  BsSpeedometer2,
+  BsTrophy
+} from 'react-icons/bs'
 
 // Calculate age dynamically
 const birthDate = new Date('2002-04-11') // April 11, 2002
@@ -66,9 +74,24 @@ const education = [
 ]
 
 const interests = [
-  { name: "Music", details: "Piano and Guitar" },
-  { name: "Motorsports", details: "Formula 1" },
-  { name: "Sports", details: "Badminton" }
+  { 
+    name: "Music", 
+    details: "Piano and Guitar",
+    icon: BsMusicNoteBeamed,
+    color: "text-blue-400"
+  },
+  { 
+    name: "Motorsports", 
+    details: "Formula 1",
+    icon: BsSpeedometer2,
+    color: "text-blue-500"
+  },
+  { 
+    name: "Sports", 
+    details: "Badminton, Football",
+    icon: BsTrophy,
+    color: "text-accent-blue"
+  }
 ]
 
 export default function About() {
@@ -92,7 +115,7 @@ export default function About() {
               <div className="relative">
                 {/* Animated halo effect */}
                 <motion.div
-                  className="absolute -inset-[2px] rounded-lg bg-gradient-to-r from-accent-blue/30 via-blue-500/30 to-blue-400/30 blur-sm"
+                  className="absolute -inset-[2px] rounded-2xl bg-gradient-to-r from-accent-blue/30 via-blue-500/30 to-blue-400/30 blur-sm"
                   animate={{
                     opacity: [0.5, 0.8, 0.5],
                   }}
@@ -102,7 +125,7 @@ export default function About() {
                     ease: "easeInOut"
                   }}
                 />
-                <div className="glass-card relative p-8">
+                <div className="relative rounded-2xl bg-cupertino-500/20 backdrop-blur-xl p-8">
                   <h1 className="mb-6 text-4xl font-bold tracking-tight text-cupertino-50">
                     About Me
                   </h1>
@@ -181,9 +204,9 @@ export default function About() {
                       key={index}
                       initial={{ x: -20, opacity: 0 }}
                       animate={{ x: 0, opacity: 1 }}
-                      whileHover={{ scale: 1.02, backgroundColor: "rgba(96, 165, 250, 0.2)" }}
+                      whileHover={{ scale: 1.01 }}
                       transition={{ delay: index * 0.1 }}
-                      className="block rounded-lg bg-cupertino-500/40 p-4 transition-all transform-gpu"
+                      className="block rounded-lg bg-cupertino-500/40 p-4 transition-all hover:bg-cupertino-500/60 transform-gpu"
                     >
                       <h3 className="font-semibold text-accent-blue">{edu.school}</h3>
                       <p className="text-sm text-cupertino-200">{edu.period}</p>
@@ -205,10 +228,22 @@ export default function About() {
                       initial={{ y: 20, opacity: 0 }}
                       animate={{ y: 0, opacity: 1 }}
                       transition={{ delay: index * 0.1 }}
-                      className="rounded-lg bg-cupertino-500/40 p-4"
+                      className="group rounded-lg bg-cupertino-500/40 p-4"
+                      whileHover={{ scale: 1.01 }}
                     >
-                      <h3 className="font-semibold text-accent-blue">{interest.name}</h3>
-                      <p className="text-sm text-cupertino-200">{interest.details}</p>
+                      <div className="flex items-center space-x-3">
+                        <motion.div
+                          className={`flex h-10 w-10 items-center justify-center rounded-full bg-cupertino-500/40 ${interest.color}`}
+                          whileHover={{ rotate: [0, -10, 10, -10, 0] }}
+                          transition={{ duration: 0.5 }}
+                        >
+                          <interest.icon className="h-5 w-5" />
+                        </motion.div>
+                        <div>
+                          <h3 className="font-semibold text-accent-blue">{interest.name}</h3>
+                          <p className="text-sm text-cupertino-200">{interest.details}</p>
+                        </div>
+                      </div>
                     </motion.div>
                   ))}
                 </div>
