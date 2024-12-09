@@ -115,9 +115,10 @@ export default function About() {
               <div className="relative">
                 {/* Animated halo effect */}
                 <motion.div
-                  className="absolute -inset-[2px] rounded-2xl bg-gradient-to-r from-accent-blue/30 via-blue-500/30 to-blue-400/30 blur-sm"
+                  className="absolute -inset-[2px] rounded-2xl bg-gradient-to-r from-accent-blue/30 via-blue-500/30 to-blue-400/30 blur-lg"
                   animate={{
                     opacity: [0.5, 0.8, 0.5],
+                    scale: [1, 1.02, 1],
                   }}
                   transition={{
                     duration: 3,
@@ -125,7 +126,7 @@ export default function About() {
                     ease: "easeInOut"
                   }}
                 />
-                <div className="relative rounded-2xl bg-cupertino-500/20 backdrop-blur-xl p-8">
+                <div className="relative p-8">
                   <h1 className="mb-6 text-4xl font-bold tracking-tight text-cupertino-50">
                     About Me
                   </h1>
