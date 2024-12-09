@@ -81,7 +81,7 @@ export default function Projects() {
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-12 text-center font-['Manifesto'] text-4xl font-bold text-cupertino-50 md:text-5xl"
+          className="mb-12 text-center text-4xl font-bold text-cupertino-50 md:text-5xl"
         >
           My Projects
         </motion.h1>

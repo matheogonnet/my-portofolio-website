@@ -133,7 +133,7 @@ export default function Chatbot() {
             <div className="flex items-center justify-between border-b border-cupertino-500/30 p-4">
               <div className="flex items-center space-x-2">
                 <BsRobot className="h-6 w-6 text-accent-blue" />
-                <h2 className="font-['Manifesto'] text-xl text-cupertino-50">Ask Me Anything!</h2>
+                <h2 className="text-xl text-cupertino-50">Ask Me Anything!</h2>
               </div>
               <button
                 onClick={() => setIsOpen(false)}

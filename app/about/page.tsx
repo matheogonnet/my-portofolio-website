@@ -93,7 +93,7 @@ export default function About() {
                   }}
                 />
                 <div className="glass-card relative p-8">
-                  <h1 className="mb-6 font-['Manifesto'] text-4xl font-bold tracking-tight text-cupertino-50">
+                  <h1 className="mb-6 text-4xl font-bold tracking-tight text-cupertino-50">
                     About Me
                   </h1>
                   <p className="text-lg text-cupertino-200">
