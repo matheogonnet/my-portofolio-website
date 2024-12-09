@@ -196,24 +196,36 @@ export default function About() {
             <FloatingElement delay={0.4}>
               <div className="glass-card p-8">
                 <h2 className="mb-6 text-2xl font-bold text-cupertino-50">Education</h2>
-                <div className="space-y-4">
-                  {education.map((edu, index) => (
-                    <motion.a
-                      href={edu.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      key={index}
-                      initial={{ x: -20, opacity: 0 }}
-                      animate={{ x: 0, opacity: 1 }}
-                      whileHover={{ scale: 1.01 }}
-                      transition={{ delay: index * 0.1 }}
-                      className="block rounded-lg bg-cupertino-500/40 p-4 transition-all hover:bg-cupertino-500/60 transform-gpu"
-                    >
-                      <h3 className="font-semibold text-accent-blue">{edu.school}</h3>
-                      <p className="text-sm text-cupertino-200">{edu.period}</p>
-                      <p className="mt-1 text-cupertino-100">{edu.degree}</p>
-                    </motion.a>
-                  ))}
+                <div className="relative">
+                  {/* Vertical line */}
+                  <div className="absolute left-3 top-0 h-full w-0.5 bg-gradient-to-b from-accent-blue via-blue-500 to-blue-400" />
+                  
+                  <div className="space-y-8">
+                    {education.map((edu, index) => (
+                      <motion.a
+                        href={edu.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        key={index}
+                        initial={{ x: -20, opacity: 0 }}
+                        animate={{ x: 0, opacity: 1 }}
+                        className="group relative flex items-start pl-10"
+                        transition={{ delay: index * 0.1 }}
+                      >
+                        {/* Dot */}
+                        <div 
+                          className="absolute left-[0.3rem] top-[1.125rem] h-4 w-4 rounded-full bg-accent-blue transition-colors duration-200 group-hover:bg-blue-400"
+                        />
+                        
+                        {/* Content */}
+                        <div className="w-full transform-gpu rounded-lg bg-cupertino-500/40 p-4 transition-all duration-200 hover:bg-cupertino-500/60">
+                          <h3 className="font-semibold text-accent-blue">{edu.school}</h3>
+                          <p className="text-sm text-cupertino-200">{edu.period}</p>
+                          <p className="mt-1 text-cupertino-100">{edu.degree}</p>
+                        </div>
+                      </motion.a>
+                    ))}
+                  </div>
                 </div>
               </div>
             </FloatingElement>
