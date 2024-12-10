@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@vercel/analytics": "^1.4.1",
+    "@vercel/speed-insights": "^1.1.0",
     "framer-motion": "^10.16.16",
     "next": "^14.2.20",
     "nodemailer": "^6.9.16",
