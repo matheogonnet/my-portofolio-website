@@ -145,16 +145,10 @@ const experienceSections: ExperienceSection[] = [
 
 const ExperienceCard = ({ experience }: { experience: Experience }) => (
   <motion.div
-    initial={{ opacity: 0, y: 20 }}
+    initial={{ opacity: 0, y: 10 }}
     animate={{ opacity: 1, y: 0 }}
-    exit={{ opacity: 0, y: -20 }}
-    whileHover={{ 
-      scale: 1.005,
-      transition: {
-        duration: 0.3,
-        ease: "easeOut"
-      }
-    }}
+    exit={{ opacity: 0, y: 10 }}
+    transition={{ duration: 0.2, ease: "easeOut" }}
     className="glass-card transform-gpu overflow-hidden p-6 bg-cupertino-500/30"
   >
     <div className="flex items-start space-x-4">
@@ -196,16 +190,10 @@ const ExperienceCard = ({ experience }: { experience: Experience }) => (
 
 const CertificationCard = ({ certification }: { certification: Certification }) => (
   <motion.div
-    initial={{ opacity: 0, y: 20 }}
+    initial={{ opacity: 0, y: 10 }}
     animate={{ opacity: 1, y: 0 }}
-    exit={{ opacity: 0, y: -20 }}
-    whileHover={{ 
-      scale: 1.005,
-      transition: {
-        duration: 0.3,
-        ease: "easeOut"
-      }
-    }}
+    exit={{ opacity: 0, y: 10 }}
+    transition={{ duration: 0.2, ease: "easeOut" }}
     className="glass-card transform-gpu overflow-hidden p-6 bg-cupertino-500/30"
   >
     <div className="flex items-center space-x-4">
@@ -243,7 +231,7 @@ const Section = ({ section }: { section: ExperienceSection }) => {
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
         className="glass-card flex w-full items-center justify-between p-6"
-        whileHover={{ scale: 1.005 }}
+        whileHover={{ scale: 1.01 }}
         transition={{ duration: 0.2 }}
       >
         <div className="flex items-center space-x-4">
@@ -256,7 +244,7 @@ const Section = ({ section }: { section: ExperienceSection }) => {
         </div>
         <motion.div
           animate={{ rotate: isOpen ? 180 : 0 }}
-          transition={{ duration: 0.3 }}
+          transition={{ duration: 0.2 }}
           className="text-accent-blue"
         >
           <BsChevronDown className="h-6 w-6" />
@@ -266,11 +254,11 @@ const Section = ({ section }: { section: ExperienceSection }) => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className="mt-4 space-y-4 overflow-hidden pl-4 sm:pl-8"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            className="mt-4 space-y-4 pl-4 sm:pl-8"
           >
             {section.experiences.map((experience, index) => (
               <ExperienceCard key={index} experience={experience} />
@@ -290,7 +278,7 @@ const CertificationsSection = () => {
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
         className="glass-card flex w-full items-center justify-between p-6"
-        whileHover={{ scale: 1.005 }}
+        whileHover={{ scale: 1.01 }}
         transition={{ duration: 0.2 }}
       >
         <div className="flex items-center space-x-4">
@@ -303,7 +291,7 @@ const CertificationsSection = () => {
         </div>
         <motion.div
           animate={{ rotate: isOpen ? 180 : 0 }}
-          transition={{ duration: 0.3 }}
+          transition={{ duration: 0.2 }}
           className="text-accent-blue"
         >
           <BsChevronDown className="h-6 w-6" />
@@ -313,11 +301,11 @@ const CertificationsSection = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className="mt-4 space-y-4 overflow-hidden pl-4 sm:pl-8"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            className="mt-4 space-y-4 pl-4 sm:pl-8"
           >
             {certifications.map((certification, index) => (
               <CertificationCard key={index} certification={certification} />
@@ -399,4 +387,4 @@ export default function Experiences() {
       </div>
     </main>
   )
-} 
+}
