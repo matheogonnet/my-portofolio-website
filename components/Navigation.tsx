@@ -111,7 +111,7 @@ export default function Navigation() {
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="relative ml-0 md:ml-[-60px]"
+                className="relative ml-0 md:ml-[-60px] xl:ml-0"
               >
                 <Link href="/">
                   <Image
@@ -119,7 +119,7 @@ export default function Navigation() {
                     alt="Mathéo Gonnet Logo"
                     width={300}
                     height={90}
-                    className="w-[200px] md:w-[300px] object-contain"
+                    className="w-[200px] md:w-[300px] xl:w-[250px] object-contain"
                   />
                 </Link>
               </motion.div>
@@ -319,4 +319,4 @@ export default function Navigation() {
       </AnimatePresence>
     </>
   )
-} 
+}
