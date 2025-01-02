@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /about
+Disallow: /api
+Disallow: /contact
+Disallow: /context
+Disallow: /experiences
+Disallow: /projects
+
+Allow: /
