@@ -1,7 +1,6 @@
 User-agent: *
 Disallow: /about
 Disallow: /contact
-Disallow: /context
 Disallow: /experiences
 Disallow: /projects
 
