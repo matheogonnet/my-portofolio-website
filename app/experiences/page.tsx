@@ -76,7 +76,20 @@ const experienceSections: ExperienceSection[] = [
     icon: <BsBriefcase className="h-6 w-6" />,
     experiences: [
       {
-        title: "Full-Stack Engineer Intern",
+        title: "Junior Consultant",
+        company: "Deloitte Digital",
+        year: "2025 - Aujourd'hui",
+        description: [
+          "Contributed to a large-scale international marketing transformation project.",
+          "Helped design and automate 110+ multi-channel customer journeys (Email/SMS/Push) with advanced personalization (AMPscript) in Salesforce Marketing Cloud.",
+          "Supported the use of unified customer data in Salesforce Data Cloud to build targeted audience segments, enabling 15min TTM for ad-hoc campaigns.",
+          "Acted as Proxy PO: authored user stories in Jira, managed backlog, ran SAFe Agile rituals.",
+          "Collaborated with cross-functional teams, bridging business and technical stakeholders to ensure high-quality, on-time campaign delivery."
+        ],
+        icon: <img src="/images/deloitte_digital.png" alt="Deloitte Digital" className="h-9 w-9 rounded-full object-cover" />
+      },
+      {
+        title: "Full-Stack Engineer",
         company: "Bouygues Telecom",
         year: "2024",
         description: [
@@ -86,11 +99,11 @@ const experienceSections: ExperienceSection[] = [
           "Created an intuitive UI/UX that was fully adopted by the management teams.",
           "Utilized technologies such as Python, Next.js, SQL, and Docker."
         ],
-        icon: <BsBuilding className="h-6 w-6" />
+        icon: <img src="/images/bouygues_telecom.png" alt="Bouygues Telecom" className="h-9 w-9 rounded-full object-cover" />
       },
       {
-        title: "Store Assistant",
-        company: "Carrefour City",
+        title: "Sales & Retail Assistant",
+        company: "Carrefour",
         year: "2022-2023",
         description: [
           "Assisted in managing store inventory and ensuring product availability.",
@@ -98,7 +111,7 @@ const experienceSections: ExperienceSection[] = [
           "Developed skills in organization, communication, and teamwork.",
           "Gained experience in handling day-to-day operations efficiently."
         ],
-        icon: <BsShop className="h-6 w-6" />
+        icon: <img src="/images/carrefour.png" alt="Carrefour" className="h-9 w-9 rounded-full object-cover" />
       },
       {
         title: "Bicycle Delivery Rider",
@@ -109,7 +122,7 @@ const experienceSections: ExperienceSection[] = [
           "Enhanced skills in time management, navigation, and problem-solving.",
           "Worked independently and adapted to dynamic environments."
         ],
-        icon: <BsBicycle className="h-6 w-6" />
+        icon: <img src="/images/gorillas.png" alt="Gorillas" className="h-10 w-10 rounded-full object-cover" />
       }
     ]
   },
@@ -126,7 +139,7 @@ const experienceSections: ExperienceSection[] = [
           "Developed strong skills in leadership, creativity, and event organization.",
           "Fostered teamwork and collaboration among young participants."
         ],
-        icon: <BsPeople className="h-6 w-6" />
+        icon: <img src="/images/scout.png" alt="Scouts" className="h-9 w-9 rounded-full object-cover" />
       },
       {
         title: "Volunteer",
@@ -137,7 +150,7 @@ const experienceSections: ExperienceSection[] = [
           "Enhanced skills in organization, teamwork, and customer engagement.",
           "Contributed to raising awareness and supporting children in need of heart surgery."
         ],
-        icon: <BsGift className="h-6 w-6" />
+        icon: <img src="/images/mecenat.png" alt="Mecenat" className="h-9 w-9 rounded-full object-cover" />
       }
     ]
   }
@@ -330,40 +343,29 @@ export default function Experiences() {
       <Navigation />
       
       <div className="container relative z-10 mx-auto px-4 pt-32 pb-8">
-        {/* Next Experience Loading Section */}
+        {/* Current Position Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="mb-12"
+          className="mb-8"
         >
-          <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-accent-blue/10 via-blue-500/10 to-blue-400/10 p-6 sm:p-8">
-            <div className="absolute inset-0 bg-cupertino-600/50 backdrop-blur-sm" />
-            <div className="relative flex flex-col sm:flex-row items-center gap-6">
-              <motion.div
-                animate={{
-                  scale: [1, 1.2, 1],
-                  opacity: [1, 0.7, 1]
-                }}
-                transition={{
-                  duration: 1.5,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-                className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-accent-blue/30 backdrop-blur-xl"
-              >
-                <BsThreeDots className="h-8 w-8 text-accent-blue" />
-              </motion.div>
-              <div className="flex-1 text-center sm:text-left">
-                <h2 className="text-2xl sm:text-3xl font-bold text-cupertino-50">🚀 Next Experience Loading...</h2>
-                <p className="mt-2 text-base sm:text-lg text-cupertino-200">Stay tuned for my upcoming professional adventure!</p>
-                <motion.div
-                  className="mt-4 h-1.5 w-48 mx-auto sm:mx-0 overflow-hidden rounded-full bg-cupertino-500/40"
-                >
+          <div className="rounded-xl bg-cupertino-500/10 p-6 border border-accent-blue/20">
+            <div className="flex flex-col sm:flex-row items-center gap-6">
+              {/* Company Logo */}
+              <div className="flex flex-col items-center">
+                <div className="relative h-16 w-16 rounded-full overflow-hidden border border-accent-blue/30">
+                  <img
+                    src="/images/deloitte_digital.png"
+                    alt="Deloitte Digital"
+                    className="h-full w-full object-cover"
+                  />
+                  {/* Subtle pulsing ring */}
                   <motion.div
-                    className="h-full bg-accent-blue"
+                    className="absolute inset-0 rounded-full border-2 border-accent-blue/40"
                     animate={{
-                      x: [-192, 192],
+                      scale: [1, 1.1, 1],
+                      opacity: [0.6, 0.2, 0.6],
                     }}
                     transition={{
                       duration: 2,
@@ -371,7 +373,54 @@ export default function Experiences() {
                       ease: "easeInOut"
                     }}
                   />
-                </motion.div>
+                </div>
+                <p className="mt-2 text-sm font-medium text-accent-blue">Deloitte Digital</p>
+              </div>
+              
+              {/* Content Section */}
+              <div className="flex-1 text-center sm:text-left">
+                <h2 className="text-lg font-semibold text-cupertino-50 mb-3">
+                  Current Position
+                </h2>
+                
+                <h3 className="text-lg font-bold text-accent-blue mb-1">Salesforce Consultant</h3>
+                <p className="text-sm text-cupertino-200 mb-2">Marketing Automation</p>
+                
+                {/* Active status with subtle animation */}
+                <div className="flex items-center justify-center sm:justify-start gap-2">
+                  <motion.div
+                    className="h-2 w-2 rounded-full bg-green-400"
+                    animate={{
+                      scale: [1, 1.3, 1],
+                      opacity: [1, 0.7, 1],
+                    }}
+                    transition={{
+                      duration: 1.5,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  />
+                  <span className="text-xs text-green-400 font-medium">Active Now</span>
+                  
+                  {/* Subtle loading dots */}
+                  <div className="flex gap-1 ml-2">
+                    {[0, 1, 2].map((i) => (
+                      <motion.div
+                        key={i}
+                        className="h-1 w-1 rounded-full bg-accent-blue/60"
+                        animate={{
+                          opacity: [0.3, 1, 0.3],
+                        }}
+                        transition={{
+                          duration: 1.2,
+                          repeat: Infinity,
+                          delay: i * 0.2,
+                          ease: "easeInOut"
+                        }}
+                      />
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           </div>

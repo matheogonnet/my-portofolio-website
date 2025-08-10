@@ -34,20 +34,28 @@ Skills:
 - Cloud Services: AWS Cloud Foundation  
 - Soft Skills: Team collaboration, curiosity, problem-solving, leadership, project management  
 
-Professional Experiences:  
-1. Full-Stack Engineer Intern at Bouygues Telecom (2024)  
+Professional Experiences (from the most recent to the oldest):  
+1. Salesforce Junior Consultant at Deloitte Digital (Feb 2025 – Present)  
+   Currently working on a large-scale international marketing transformation project.  
+   ▸ Helped design and automate 110+ multi-channel customer journeys (Email/SMS/Push) with advanced personalization (AMPscript) in Salesforce Marketing Cloud.  
+   ▸ Supported the use of unified customer data in Salesforce Data Cloud to build targeted audience segments, enabling 15min TTM for ad-hoc campaigns.  
+   ▸ Acted as Proxy PO: authored user stories in Jira, managed backlog, ran SAFe Agile rituals.  
+   ▸ Collaborated with cross-functional teams, bridging business and technical stakeholders to ensure high-quality, on-time campaign delivery.  
+
+2. Full-Stack Engineer at Bouygues Telecom (2024)  
    Developed a full-stack automation tool for generating PowerPoint presentations and integrating real-time KPIs.  
 
-2. Store Assistant at Carrefour City (2022-2023)  
+3. Sales & Retail Assistant at Carrefour (2022-2023)  
    Managed inventory and provided customer service in a retail environment.  
 
-3. Bicycle Delivery Rider at Gorillas (2021-2022)  
-   Delivered goods efficiently while improving time management and customer service skills.  
+4. Bicycle Delivery Rider at Gorillas (2021-2022)  
+   Delivered goods efficiently while improving time management and customer service skills.
 
-4. Volunteer Youth Leader at Scouts & Guides of France (2012-2022)  
+Volunteering Experiences:
+1. Volunteer Youth Leader at Scouts & Guides of France (2012-2022)  
    Led community service projects and youth educational activities.  
 
-5. Volunteer at Mécénat Chirurgie Cardiaque (2023)  
+2. Volunteer at Mécénat Chirurgie Cardiaque (2023, 2024)  
    Assisted with fundraising activities during a charity event.  
 
 Certifications:  

@@ -37,12 +37,13 @@ const FloatingElement = ({ delay = 0, children }: { delay?: number, children: Re
 
 const skills = {
   technical: [
-    "Python", "R", "C", "C++", "Java", "JavaScript", "HTML", "CSS",
-    "SQL (MySQL)", "NoSQL (MongoDB, Elasticsearch)",
-    "Power BI", "Apache Spark (Databricks)", "Docker", "Kubernetes",
+    "Salesforce Marketing Cloud", "Salesforce Data Cloud","CRM", "SQL",
+    "Python", "Power BI","R", "C/C++", "Java", "JavaScript", "HTML", "CSS",
+    "NoSQL", "Apache Spark (Databricks)", "Docker", "Kubernetes",
     "CI/CD", "GitHub", "Machine Learning", "Deep Learning"
   ],
   soft: [
+    "Marketing Automation",
     "Strong Communication Skills", 
     "Public Speaking",
     "Team Collaboration", 
@@ -131,8 +132,7 @@ export default function About() {
                     About Me
                   </h1>
                   <p className="text-lg text-cupertino-200">
-                    Hi! 👋 I'm Mathéo Gonnet, a {age}-year-old student pursuing a Master's in Data & Artificial Intelligence at ECE Paris. Passionate about data science, web development, and AI, I'm constantly seeking to learn and take on new challenges. 🚀
-                  </p>
+                  Hi! 👋 I'm Mathéo Gonnet, a 23-year-old Junior Consultant at Deloitte Digital, specializing in Marketing Automation projects using Salesforce within data-driven and CRM-focused environments. 👨‍💻 </p>
                 </div>
               </div>
             </FloatingElement>

@@ -223,9 +223,22 @@ export default function Contact() {
                 ))}
 
                 <div className="rounded-lg bg-cupertino-500/40 p-3 sm:p-4">
-                  <div className="mb-2 flex items-center space-x-2">
-                    <BsFileEarmarkPdf className="h-4 w-4 sm:h-5 sm:w-5 text-accent-blue" />
-                    <h3 className="text-base sm:text-lg font-semibold text-cupertino-50">Resume</h3>
+                  <div className="mb-2 flex items-center justify-between">
+                    <div className="flex items-center space-x-2">
+                      <BsFileEarmarkPdf className="h-4 w-4 sm:h-5 sm:w-5 text-accent-blue" />
+                      <h3 className="text-base sm:text-lg font-semibold text-cupertino-50">Resume</h3>
+                    </div>
+                    
+                    {/* Compact Warning Badge */}
+                    <motion.div
+                      initial={{ opacity: 0, x: 10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.4 }}
+                      className="flex items-center gap-1.5 rounded-full bg-amber-500/15 px-2 py-1 border border-amber-500/25"
+                    >
+                      <div className="h-1.5 w-1.5 rounded-full bg-amber-400"></div>
+                      <span className="text-xs font-medium text-amber-300">Outdated</span>
+                    </motion.div>
                   </div>
                   
                   <div className="grid gap-2 sm:grid-cols-2">
