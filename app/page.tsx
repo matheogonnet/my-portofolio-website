@@ -84,9 +84,9 @@ export default function Home() {
               
               <div className="mt-4 space-y-2 font-mono text-sm">
                 <ConsoleText text="C:\>" />
-                <ConsoleText text="C:\> cd Consulting_Marketing" lastWord={true} />
-                <ConsoleText text={`C:\\Consulting_Marketing> cd ${age}yo`} lastWord={true} />
-                <ConsoleText text={`C:\\Consulting_Marketing\\${age}yo> Salesforce`} lastWord={true} />
+                <ConsoleText text="C:\> cd Consulting" lastWord={true}/>
+                <ConsoleText text={`C:\\Consulting> cd ${age}yo`} lastWord={true} />
+                <ConsoleText text={`C:\\Consulting\\${age}yo> Salesforce`} lastWord={true} />
                 <motion.div
                   animate={{ opacity: [1, 0] }}
                   transition={{ duration: 0.8, repeat: Infinity }}
