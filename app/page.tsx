@@ -82,18 +82,16 @@ export default function Home() {
                 <span className="ml-2 text-sm text-cupertino-300">Terminal</span>
               </div>
               
-              <div className="mt-4 space-y-2 font-mono text-sm overflow-x-auto whitespace-nowrap scrollbar-thin scrollbar-track-cupertino-600 scrollbar-thumb-cupertino-400">
-                <div className="min-w-min">
+              <div className="mt-4 space-y-2 font-mono text-sm">
                 <ConsoleText text="C:\>" />
                 <ConsoleText text="C:\> cd Consulting_Marketing" lastWord={true} />
                 <ConsoleText text={`C:\\Consulting_Marketing> cd ${age}yo`} lastWord={true} />
-                <ConsoleText text={`C:\\Consulting_Marketing\\${age}yo> Salesforce_Consultant`} lastWord={true} />
+                <ConsoleText text={`C:\\Consulting_Marketing\\${age}yo> Salesforce`} lastWord={true} />
                 <motion.div
                   animate={{ opacity: [1, 0] }}
                   transition={{ duration: 0.8, repeat: Infinity }}
                   className="mt-1 h-4 w-2 bg-accent-blue"
                 />
-                </div>
               </div>
             </div>
           </motion.div>
